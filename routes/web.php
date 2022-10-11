@@ -9,23 +9,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/* ca marche
-Route::middleware('admin:admin')->group(function () {
-    Route::get('admin/login', [AdminController::class, 'LoginForm']);
-    Route::post('admin/login', [AdminController::class, 'store'])->name('admin.login');
-});
-*/
 
-
-//mais ca c'est plus propre
-Route::middleware(['admin:admin'])->prefix('/admin')->group(function () {
-
-    Route::controller(AdminController::class)->group(function(){
+Route::controller(AdminController::class)->prefix('/admin')->group(function(){
+    Route::middleware(['admin:admin'])->group(function(){
         Route::get('/login','LoginForm');
         Route::post('/login','store')->name('admin.login');
     });
-});
+    Route::get('/logout','destroy')->name('admin.logout');
 
+});
 
 
 Route::middleware([
@@ -37,7 +29,7 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/admin/dashboard', function () {
-        return view('dashboard');
+        return view('admin.index');
     })->name('dashboard')->middleware('auth:admin');
 
 });
