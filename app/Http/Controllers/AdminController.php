@@ -18,6 +18,8 @@ use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
 
 use App\Models\Admin;
+use Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller //modiff
 {
@@ -79,18 +81,19 @@ class AdminController extends Controller //modiff
     }
 
     public function AdminProfile(){
-        $admin = Admin::findOrFail('1');
+        $admin = Admin::findOrFail(Auth::id());
         return view('admin.admin_profile',compact('admin'));
     }
 
     public function AdminProfileEdit(){
-        $admin = Admin::findOrFail('1');
+        $admin = Admin::findOrFail(Auth::id());
         return view('admin.admin_profile_edit',compact('admin'));
     }
 
     public function AdminProfileStore(Request $request){
 
-        $data = Admin::findOrFail('1');
+        $data = Admin::findOrFail(Auth::id());
+        
         
         $data->name = $request->name;
         $data->email = $request->email;
@@ -98,7 +101,7 @@ class AdminController extends Controller //modiff
         $image = $request->file('profile_photo_path');
 
         if($image){
-            $del_image = Admin::findOrFail('1')->profile_photo_path;
+            $del_image = $data->profile_photo_path;
             
             //unlink('upload/profile_image/'.$del_image);
             @unlink(public_path('upload/profile_image/'.$del_image));
@@ -119,5 +122,40 @@ class AdminController extends Controller //modiff
         );
 
         return redirect()->route('admin.profile')->with($notification);
+    }
+
+    public function AdminChangePassword(){
+        
+        return view('admin.change_password');
+    }
+
+    public function AdminUpdatePassword(Request $request){
+
+        $validateData = $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirmation_password' => 'required|same:new_password',   //et tu colles bien tout sinon ca te fais de jolies erreurs
+        ]);
+
+        //$hashedPassword = Auth::user()->password;     //ca marche aussi
+        $hashedPassword = Admin::findOrFail(Auth::id())->password;
+        
+        if(Hash::check($request->old_password,$hashedPassword)){
+
+            $admin = Admin::findOrFail(Auth::id());
+
+            //$admin->password = bcrypt($request->new_password);    //ca marche aussi
+            $admin->password = Hash::make($request->new_password);
+
+            $admin->save();
+
+            //Auth::logout();   //pas la peine jetstream le fait automatiquement
+
+            return redirect()->route('admin_dashboard');
+        }
+        else{
+            return redirect()->back();
+        }
+        
     }
 }

@@ -17,10 +17,12 @@ Route::controller(AdminController::class)->prefix('/admin')->group(function(){
         
     });
     Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'])->group(function(){
-        Route::get('/logout','destroy')->name('admin.logout');
-        Route::get('/profile','AdminProfile')->name('admin.profile');
-        Route::get('/profile/edit','AdminProfileEdit')->name('admin.profile.edit');
-        Route::post('/profile/store','AdminProfileStore')->name('admin.profile.store');
+        Route::get('/logout','destroy')->name('admin.logout')->middleware('auth:admin');
+        Route::get('/profile','AdminProfile')->name('admin.profile')->middleware('auth:admin');
+        Route::get('/profile/edit','AdminProfileEdit')->name('admin.profile.edit')->middleware('auth:admin');
+        Route::post('/profile/store','AdminProfileStore')->name('admin.profile.store')->middleware('auth:admin');
+        Route::get('/change/password','AdminChangePassword')->name('admin.change.password')->middleware('auth:admin');
+        Route::post('/update/password','AdminUpdatePassword')->name('admin.update.password')->middleware('auth:admin');
     });
 });
 
@@ -37,7 +39,7 @@ Route::middleware([
 
     Route::get('/admin/dashboard', function () {
         return view('admin.index');
-    })->name('dashboard')->middleware('auth:admin');
+    })->name('admin_dashboard')->middleware('auth:admin');
 
 });
 
