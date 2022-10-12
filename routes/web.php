@@ -14,10 +14,17 @@ Route::controller(AdminController::class)->prefix('/admin')->group(function(){
     Route::middleware(['admin:admin'])->group(function(){
         Route::get('/login','LoginForm');
         Route::post('/login','store')->name('admin.login');
+        
     });
-    Route::get('/logout','destroy')->name('admin.logout');
-
+    Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'])->group(function(){
+        Route::get('/logout','destroy')->name('admin.logout');
+        Route::get('/profile','AdminProfile')->name('admin.profile');
+        Route::get('/profile/edit','AdminProfileEdit')->name('admin.profile.edit');
+        Route::post('/profile/store','AdminProfileStore')->name('admin.profile.store');
+    });
 });
+
+
 
 
 Route::middleware([
