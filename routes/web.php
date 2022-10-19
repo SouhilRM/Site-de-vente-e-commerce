@@ -2,14 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\IndexController;
 
 
+/* ========================================ADMIN======================================== */
+Route::middleware([
+    
+    'auth:sanctum,admin',
+    config('jetstream.auth_session'),
+    'verified'
 
-Route::get('/', function () {
-    return view('welcome');
+])->group(function () {
+
+    Route::get('/admin/dashboard', function () {
+        return view('admin.index');
+    })->name('admin_dashboard')->middleware('auth:admin');
+
 });
-
-
 Route::controller(AdminController::class)->prefix('/admin')->group(function(){
     Route::middleware(['admin:admin'])->group(function(){
         Route::get('/login','LoginForm');
@@ -25,26 +34,10 @@ Route::controller(AdminController::class)->prefix('/admin')->group(function(){
         Route::post('/update/password','AdminUpdatePassword')->name('admin.update.password')->middleware('auth:admin');
     });
 });
+/* ========================================/ADMIN======================================== */
 
 
-
-
-Route::middleware([
-    
-    'auth:sanctum,admin',
-    config('jetstream.auth_session'),
-    'verified'
-
-])->group(function () {
-
-    Route::get('/admin/dashboard', function () {
-        return view('admin.index');
-    })->name('admin_dashboard')->middleware('auth:admin');
-
-});
-
-
-
+/* ========================================USER======================================== */
 Route::middleware([
     
     'auth:sanctum',
@@ -58,3 +51,8 @@ Route::middleware([
     })->name('dashboard');
 
 });
+Route::controller(IndexController::class)->group(function(){
+    Route::get('/','Index')->name('home');
+    
+});
+/* ========================================/USER======================================== */

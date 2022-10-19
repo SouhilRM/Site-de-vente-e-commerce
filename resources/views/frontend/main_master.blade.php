@@ -11,7 +11,7 @@
 <title>Easy-Wab Shop</title>
 
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="{{ asset('frontend/assets/'css/bootstrap.min.css) }}">
+<link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
 
 <!-- Customizable CSS -->
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}">
