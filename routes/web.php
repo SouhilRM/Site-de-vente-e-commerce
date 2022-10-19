@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
 
 
-/* ========================================ADMIN======================================== */
+/* =======================================ADMIN======================================== */
 Route::middleware([
     
     'auth:sanctum,admin',
@@ -20,12 +20,15 @@ Route::middleware([
 
 });
 Route::controller(AdminController::class)->prefix('/admin')->group(function(){
+
     Route::middleware(['admin:admin'])->group(function(){
         Route::get('/login','LoginForm');
         Route::post('/login','store')->name('admin.login');
         
     });
-    Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'])->group(function(){
+
+    /*Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'])->group(function(){*/
+    Route::middleware(['auth:admin'])->group(function () {
         Route::get('/logout','destroy')->name('admin.logout')->middleware('auth:admin');
         Route::get('/profile','AdminProfile')->name('admin.profile')->middleware('auth:admin');
         Route::get('/profile/edit','AdminProfileEdit')->name('admin.profile.edit')->middleware('auth:admin');
@@ -34,7 +37,7 @@ Route::controller(AdminController::class)->prefix('/admin')->group(function(){
         Route::post('/update/password','AdminUpdatePassword')->name('admin.update.password')->middleware('auth:admin');
     });
 });
-/* ========================================/ADMIN======================================== */
+/* ======================================/ADMIN======================================== */
 
 
 /* ========================================USER======================================== */
@@ -52,7 +55,15 @@ Route::middleware([
 
 });
 Route::controller(IndexController::class)->group(function(){
+
     Route::get('/','Index')->name('home');
-    
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/user/logout','UserLogout')->name('user.logout');
+        Route::get('/user/profile','UserProfile')->name('user.profile');
+        Route::post('/user/profile/store','UserProfileStore')->name('user.profile.store');
+        Route::get('/user/change/password','UserChangePassword')->name('user.change.password');
+        Route::post('/user/update/password','UserUpdatePassword')->name('user.update.password');
+    });
 });
-/* ========================================/USER======================================== */
+/* ========================================/USER======================================= */
