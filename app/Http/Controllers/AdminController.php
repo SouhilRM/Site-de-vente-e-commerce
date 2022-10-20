@@ -103,7 +103,7 @@ class AdminController extends Controller //modiff
         if($image){
             $del_image = $data->profile_photo_path;
             
-            //unlink('upload/profile_image/'.$del_image);
+            //unlink('upload/profile_image/'.$del_image);   marche aussu kifkif
             @unlink(public_path('upload/profile_image/'.$del_image));
             
 

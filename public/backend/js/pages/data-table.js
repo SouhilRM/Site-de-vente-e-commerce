@@ -69,7 +69,7 @@ $(function () {
         } );
     } );
 	
-	
+	/*  faut commenter ca sinon ca marche pas
 	//---------------Form inputs
 	var table = $('#example6').DataTable();
  
@@ -81,7 +81,7 @@ $(function () {
         );
         return false;
     } );
-	
+	*/
 	
 	
 	
