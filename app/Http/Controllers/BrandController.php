@@ -87,7 +87,7 @@ class BrandController extends Controller
             ]);
         }
         $notification = array(
-            'message' => 'Brand added successfuly', 
+            'message' => 'Brand updated successfuly', 
             'alert-type' => 'success'
         );
         return redirect()->route('all.brand')->with($notification);

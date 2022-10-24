@@ -42,9 +42,26 @@
               <a href="{{ route('all.brand') }}"><i class="ti-more"></i>All Brands</a>
             </li>
           </ul>
+        </li>
 
-          
-        </li> 
+        <li class="treeview {{ ($prefix == '/categorie')? 'active' : '' }}">
+          <a href="#">
+            <i data-feather="message-circle"></i>
+            <span>Categories</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+
+          <ul class="treeview-menu">
+            <li class="{{ ($route == 'all.categorie')? 'active' : '' }}">
+              <a href="{{ route('all.categorie') }}"><i class="ti-more"></i>All category</a>
+            </li>
+            <li class="{{ ($route == 'all.sub.categorie')? 'active' : '' }}">
+              <a href="{{ route('all.sub.categorie') }}"><i class="ti-more"></i>All sub-category</a>
+            </li>
+          </ul>
+        </li>
         
           <li class="treeview">
             <a href="#">
