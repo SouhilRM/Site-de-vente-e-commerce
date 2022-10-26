@@ -6,6 +6,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\SubCategorieController;
+use App\Http\Controllers\SubSubCategorieController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -107,3 +108,17 @@ use App\Http\Controllers\SubCategorieController;
         }); 
     });
 /* ================================/SUB-CATEGORIE=============================== */
+
+/* ===============================SUB-CATEGORIE================================= */
+    Route::controller(SubSubCategorieController::class)->prefix('/categorie')->group(function(){
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/sub/sub/all','AllSubSubCategorie')->name('all.sub.sub.categorie');
+            Route::get('/subcategorie/ajax/{categorie_id}','GetSubCategory');
+            Route::post('/sub/sub/store','StoreSubSubCategorie')->name('store.sub.sub.categorie');
+            Route::get('/sub/sub/edit/{id}','EditSubSubCategorie')->name('edit.sub.sub.categorie');
+            Route::post('/sub/sub/update','UpdateSubSubCategorie')->name('update.sub.sub.categorie');
+            Route::get('/sub/sub/delete/{id}','DeleteSubSubCategorie')->name('delete.sub.sub.categorie');
+        }); 
+    });
+/* ================================/SUB-CATEGORIE=============================== */
+

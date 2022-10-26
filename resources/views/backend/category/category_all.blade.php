@@ -17,7 +17,7 @@
                                 <thead>
                                    <tr>
                                        <th>Category En</th>
-                                       <th>Category En</th>
+                                       <th>Category Fr</th>
                                        <th>Icon</th>
                                        <th>Actions</th>
                                        
@@ -57,7 +57,7 @@
                             <div class="table-responsive">
 
 
-                                <form method="POST" action="{{ route('store.categorie') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('store.categorie') }}">
                                     @csrf
                                           
                                     <div class="form-group">

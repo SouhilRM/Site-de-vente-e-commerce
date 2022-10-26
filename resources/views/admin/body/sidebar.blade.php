@@ -60,6 +60,9 @@
             <li class="{{ ($route == 'all.sub.categorie')? 'active' : '' }}">
               <a href="{{ route('all.sub.categorie') }}"><i class="ti-more"></i>All sub-category</a>
             </li>
+            <li class="{{ ($route == 'all.sub.sub.categorie')? 'active' : '' }}">
+              <a href="{{ route('all.sub.sub.categorie') }}"><i class="ti-more"></i>All sub-sub-category</a>
+            </li>
           </ul>
         </li>
         

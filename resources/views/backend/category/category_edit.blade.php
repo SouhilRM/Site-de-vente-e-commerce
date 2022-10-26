@@ -16,7 +16,7 @@
                             <div class="table-responsive">
 
 
-                                <form method="POST" action="{{ route('update.categorie') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('update.categorie') }}">
                                     @csrf
                                           
                                     <input type="hidden" name="id" value="{{ $category->id }}">
