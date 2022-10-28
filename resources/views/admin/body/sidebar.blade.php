@@ -65,6 +65,26 @@
             </li>
           </ul>
         </li>
+
+        <li class="treeview {{ ($prefix == '/product')? 'active' : '' }}">
+          <a href="#">
+            <i data-feather="message-circle"></i>
+            <span>Products</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+
+          <ul class="treeview-menu">
+            <li class="{{ ($route == 'all.product')? 'active' : '' }}">
+              <a href="{{ route('all.product') }}"><i class="ti-more"></i>All products</a>
+            </li>
+            <li class="{{ ($route == 'add.product')? 'active' : '' }}">
+              <a href="{{ route('add.product') }}"><i class="ti-more"></i>Add products</a>
+            </li>
+            
+          </ul>
+        </li>
         
           <li class="treeview">
             <a href="#">

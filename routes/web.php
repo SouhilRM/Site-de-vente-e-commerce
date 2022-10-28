@@ -7,6 +7,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\SubCategorieController;
 use App\Http\Controllers\SubSubCategorieController;
+use App\Http\Controllers\ProductController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -41,7 +42,6 @@ use App\Http\Controllers\SubSubCategorieController;
         });
     });
 /* ======================================/ADMIN======================================== */
-
 
 /* ========================================USER======================================== */
     Route::middleware([
@@ -122,3 +122,18 @@ use App\Http\Controllers\SubSubCategorieController;
     });
 /* ================================/SUB-CATEGORIE=============================== */
 
+/* =======================================PRODUCT======================================= */
+    Route::controller(ProductController::class)->prefix('/product')->group(function(){
+
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/all','AllProduct')->name('all.product');
+            Route::get('/add','AddProduct')->name('add.product');
+            Route::get('/subcategorie/ajax/{categorie_id}','GetSubCategory');
+            Route::get('/subsubcategorie/ajax/{sub_categorie_id}','GetSubSubCategory');
+            //Route::post('/store','StoreBrand')->name('store.brand');
+            //Route::get('/edit/{id}','EditBrand')->name('edit.brand');
+            //Route::post('/update','UpdateBrand')->name('update.brand');
+            //Route::get('/delete/{id}','DeleteBrand')->name('delete.brand');
+        }); 
+    });
+/* =======================================/PRODUCT======================================= */
