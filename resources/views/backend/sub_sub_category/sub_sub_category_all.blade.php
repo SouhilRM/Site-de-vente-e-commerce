@@ -69,7 +69,7 @@
                                             <select name="categorie_id" id="select" class="form-control" aria-invalid="false">
                                                 <option value="">Select One Category</option>
                                                 @foreach ($categorie as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->categorie_name_en }}</option>
+                                                    <option value="{{ $item->id }}" {{ old('categorie_id')==$item->id ? 'selected':'' }}>{{ $item->categorie_name_en }}</option>
                                                 @endforeach
                                             </select>
                                             @error('categorie_id')
@@ -94,7 +94,7 @@
                                     <div class="form-group">
                                         <h5>Sub-Category Name English <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input id="current_password" type="text" name="categorie_name_en" class="form-control">
+                                            <input id="current_password" type="text" name="categorie_name_en" value="{{ old('categorie_name_en') }}" class="form-control">
                                             @error('categorie_name_en')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -104,7 +104,7 @@
                                     <div class="form-group">
                                         <h5>Sub-Category Name French <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input id="current_password" type="text" name="categorie_name_fr" class="form-control">
+                                            <input id="current_password" type="text" name="categorie_name_fr" value="{{ old('categorie_name_fr') }}" class="form-control">
                                             @error('categorie_name_fr')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -132,7 +132,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-      $('select[name="categorie_id"]').on('change', function(){
+      $('select[name="categorie_id"]').on('click', function(){
             var categorie_id = $(this).val();
             if(categorie_id) {
                 $.ajax({

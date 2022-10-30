@@ -99,7 +99,7 @@
             if(categorie_id) {
                 $.ajax({
                     url: "{{  url('/categorie/subcategorie/ajax') }}/"+categorie_id,
-                    type:"GET",
+                    type:"GET", 
                     dataType:"json",
                     success:function(data) {
                         var d =$('select[name="sub_categorie_id"]').empty();

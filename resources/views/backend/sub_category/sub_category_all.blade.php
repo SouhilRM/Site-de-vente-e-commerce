@@ -66,7 +66,7 @@
                                             <select name="category" id="select" class="form-control" aria-invalid="false">
                                                 <option value="">Select One Category</option>
                                                 @foreach ($category as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->categorie_name_en }}</option>
+                                                    <option value="{{ $item->id }}" {{ (old('category') == $item->id)? 'selected' : '' }}>{{ $item->categorie_name_en }}</option>
                                                 @endforeach
                                             </select>
                                             @error('category')
@@ -78,7 +78,7 @@
                                     <div class="form-group">
                                         <h5>Sub-Category Name English <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input id="current_password" type="text" name="categorie_name_en" class="form-control">
+                                            <input id="current_password" type="text" name="categorie_name_en" value="{{ old('categorie_name_en') }}" class="form-control">
                                             @error('categorie_name_en')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -88,7 +88,7 @@
                                     <div class="form-group">
                                         <h5>Sub-Category Name French <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input id="current_password" type="text" name="categorie_name_fr" class="form-control">
+                                            <input id="current_password" type="text" name="categorie_name_fr" value="{{ old('categorie_name_fr') }}" class="form-control">
                                             @error('categorie_name_fr')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

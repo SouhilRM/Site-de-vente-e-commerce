@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <h5>Brand Name English <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input id="current_password" type="text" name="brand_name_en" class="form-control">
+                                            <input id="current_password" type="text" name="brand_name_en" value="{{ old('brand_name_en') }}" class="form-control">
                                             @error('brand_name_en')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -77,7 +77,7 @@
                                     <div class="form-group">
                                         <h5>Brand Name French <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input id="current_password" type="text" name="brand_name_fr" class="form-control">
+                                            <input id="current_password" type="text" name="brand_name_fr" value="{{ old('brand_name_fr') }}" class="form-control">
                                             @error('brand_name_fr')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -87,7 +87,7 @@
                                     <div class="form-group">
                                         <h5>Brand Image <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="file" id="image" name="brand_image" class="form-control">
+                                            <input type="file" id="image" name="brand_image" value="{{ old('brand_image') }}" class="form-control">
                                         </div>
                                             @error('brand_image')
                                                 <span class="text-danger">{{ $message }}</span>

@@ -37,8 +37,8 @@ return new class extends Migration
             $table->string('discount_price')->nullable();
             $table->string('short_descp_en')->nullable();
             $table->string('short_descp_fr')->nullable();
-            $table->string('long_descp_en')->nullable();
-            $table->string('long_descp_fr')->nullable();
+            $table->text('long_descp_en')->nullable();
+            $table->text('long_descp_fr')->nullable();
             $table->string('product_thambnail')->nullable();
             $table->integer('hot_deals')->nullable();
             $table->integer('featured')->nullable();

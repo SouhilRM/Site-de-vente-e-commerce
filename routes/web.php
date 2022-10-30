@@ -130,10 +130,10 @@ use App\Http\Controllers\ProductController;
             Route::get('/add','AddProduct')->name('add.product');
             Route::get('/subcategorie/ajax/{categorie_id}','GetSubCategory');
             Route::get('/subsubcategorie/ajax/{sub_categorie_id}','GetSubSubCategory');
-            //Route::post('/store','StoreBrand')->name('store.brand');
-            //Route::get('/edit/{id}','EditBrand')->name('edit.brand');
-            //Route::post('/update','UpdateBrand')->name('update.brand');
-            //Route::get('/delete/{id}','DeleteBrand')->name('delete.brand');
+            Route::post('/store','StoreProduct')->name('store.product');
+            //Route::get('/edit/{id}','EditProduct')->name('edit.product');
+            //Route::post('/update','UpdateProduct')->name('update.product');
+            //Route::get('/delete/{id}','DeleteProduct')->name('delete.product');
         }); 
     });
 /* =======================================/PRODUCT======================================= */
