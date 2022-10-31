@@ -133,7 +133,9 @@ use App\Http\Controllers\ProductController;
             Route::post('/store','StoreProduct')->name('store.product');
             Route::get('/edit/{id}','EditProduct')->name('edit.product');
             Route::post('/update','UpdateProduct')->name('update.product');
-            //Route::get('/delete/{id}','DeleteProduct')->name('delete.product');
+            Route::post('/update/images','UpdateImages')->name('update.product.images');
+            Route::get('/delete/images/{id}','DeleteProductImages')->name('delete.product.images');
+            Route::get('/delete/{id}','DeleteProduct')->name('delete.product');
         }); 
     });
 /* =======================================/PRODUCT======================================= */

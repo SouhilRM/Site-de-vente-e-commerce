@@ -247,9 +247,9 @@
             </div><!-- end row 5 --><br>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <h5>Main Thambnail <span class="text-danger">*</span></h5>
+                        <h5>Change Main Thambnail <span class="text-danger">*</span></h5>
                         
                         <input type="file" name="product_thambnail" class="form-control" onChange="mainThamUrl(this)">
                         @error('product_thambnail') 
@@ -261,7 +261,19 @@
                     </div>
                 </div>
 
-                
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <h5>Add More Images <span class="text-danger">*</span></h5>
+                        
+                        <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg">
+                        @error('multi_img') 
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        <div class="form-group" id="preview_img"></div>
+                        
+                    </div>
+                </div>
+
             </div><!-- end row 6 --><br>
 
             <div class="row">
@@ -360,26 +372,9 @@
         <div class="box-body">
     
     
-            <form method="post" action="{{ route('store.product') }}" enctype="multipart/form-data" >
+            <form method="post" action="{{ route('update.product.images') }}" enctype="multipart/form-data" >
                 @csrf
     
-                <div class="row">
-                    
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <h5>Multiple Image <span class="text-danger">*</span></h5>
-                            
-                            <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" required>
-                            @error('multi_img') 
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                            <div class="form-group" id="preview_img"></div>
-                            
-                        </div>
-                    </div>
-                </div><!-- end row 6 --><br>
-
-
                 <div class="table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
@@ -399,13 +394,11 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-9">
-                                        <input type="file" name="product_thambnail" class="form-control" onChange="multi_img(this)">
-                                        <br>
-                                        <img src="" id="multi" height="200px" width="auto">
+                                        <input type="file" name="multi_img[{{  $item->id }}]" class="form-control">
                                         </div>
                                         
                                         <div class="col-md-2">
-                                            <a href="{{ route('delete.brand',$item->id) }}" class="col-2 btn btn-danger sm" title="delete" id="delete"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('delete.product.images',$item->id) }}" class="btn btn-danger sm" title="delete" id="delete"><i class="fa fa-trash"></i></a>
                                         </div>
                                         
                                     </div>
@@ -483,14 +476,31 @@
 	}	
 </script>
 
-<script type="text/javascript">
-	function multi_img(input){
-        var reader = new FileReader();
-        reader.onload = function(e){
-            $('#multi').attr('src',e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-	}	
+<script>
+    $(document).ready(function(){
+        $('#multiImg').on('change', function(){ //on file input change
+            if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+            {
+                var data = $(this)[0].files; //this file data
+                
+                $.each(data, function(index, file){ //loop though each file
+                    if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
+                        var fRead = new FileReader(); //new filereader
+                        fRead.onload = (function(file){ //trigger function on successful read
+                        return function(e) {
+                            var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width('auto').height('120px'); //create image element 
+                            $('#preview_img').append(img); //append image to output element
+                        };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+                    }
+                });
+                
+            }else{
+                alert("Your browser doesn't support File API!"); //if File API is absent
+            }
+        });
+    }); 
 </script>
 
 @endsection
