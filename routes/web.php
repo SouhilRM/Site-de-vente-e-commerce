@@ -136,6 +136,8 @@ use App\Http\Controllers\ProductController;
             Route::post('/update/images','UpdateImages')->name('update.product.images');
             Route::get('/delete/images/{id}','DeleteProductImages')->name('delete.product.images');
             Route::get('/delete/{id}','DeleteProduct')->name('delete.product');
+            Route::get('/inactive/{id}','InActiveProduct')->name('inactive.product');
+            Route::get('/active/{id}','ActiveProduct')->name('active.product');
         }); 
     });
 /* =======================================/PRODUCT======================================= */

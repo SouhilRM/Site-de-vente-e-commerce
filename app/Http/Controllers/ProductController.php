@@ -286,4 +286,22 @@ class ProductController extends Controller
         );
         return redirect()->back()->with($notification);
     }
+
+    public function InActiveProduct($id){
+        Product::findOrFail($id)->update(['status' => 0]);
+        $notification = array(
+            'message' => 'Product Status Updated', 
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function ActiveProduct($id){
+        Product::findOrFail($id)->update(['status' => 1]);
+        $notification = array(
+            'message' => 'Product Status Updated', 
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
 }
