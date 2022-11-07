@@ -34,7 +34,7 @@
             <tr>
                 <td class="text-center"><img src="{{ asset($item->product_thambnail) }}" alt="" height="150px" width="180px"></td>
                 <td>{{ $item->product_name_en }}</td>
-                <td>{{ $item->selling_price }}</td>
+                <td>{{ $item->selling_price }} $</td>
                 <td>{{ $item->product_qty }}</td>
                 <td class="text-center">
                     @if($item->discount_price == NULL)
