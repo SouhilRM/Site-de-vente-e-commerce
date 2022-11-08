@@ -9,6 +9,7 @@ use App\Http\Controllers\SubCategorieController;
 use App\Http\Controllers\SubSubCategorieController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\LanguageController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -144,16 +145,23 @@ use App\Http\Controllers\SliderController;
 /* =======================================/PRODUCT======================================= */
 
 /* ========================================BRAND======================================= */
-Route::controller(SliderController::class)->prefix('/slider')->group(function(){
+    Route::controller(SliderController::class)->prefix('/slider')->group(function(){
 
-    Route::middleware(['auth:admin'])->group(function () {
-        Route::get('/all','AllSlider')->name('all.slider');
-        Route::post('/store','StoreSlider')->name('store.slider');
-        Route::get('/edit/{id}','EditSlider')->name('edit.slider');
-        Route::post('/update','UpdateSlider')->name('update.slider');
-        Route::get('/delete/{id}','DeleteSlider')->name('delete.slider');
-        Route::get('/inactive/{id}','InActiveSlider')->name('inactive.slider');
-        Route::get('/active/{id}','ActiveSlider')->name('active.slider');
-    }); 
-});
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/all','AllSlider')->name('all.slider');
+            Route::post('/store','StoreSlider')->name('store.slider');
+            Route::get('/edit/{id}','EditSlider')->name('edit.slider');
+            Route::post('/update','UpdateSlider')->name('update.slider');
+            Route::get('/delete/{id}','DeleteSlider')->name('delete.slider');
+            Route::get('/inactive/{id}','InActiveSlider')->name('inactive.slider');
+            Route::get('/active/{id}','ActiveSlider')->name('active.slider');
+        }); 
+    });
+/* ========================================/BRAND======================================= */
+
+/* ========================================BRAND======================================= */
+    Route::controller(LanguageController::class)->group(function(){
+        Route::get('/language/english','English')->name('english.languange');
+        Route::get('/language/french','French')->name('french.languange');
+    });
 /* ========================================/BRAND======================================= */
