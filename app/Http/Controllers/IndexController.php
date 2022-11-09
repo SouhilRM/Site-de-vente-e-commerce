@@ -6,11 +6,17 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Categorie;
+use App\Models\Slider;
+use App\Models\Product;
 
 class IndexController extends Controller
 {
     public function Index(){
-        return view('frontend.index');
+        $categories = Categorie::orderBy('categorie_name_en','ASC')->get();
+        $slider = Slider::where('status',1)->orderBy('id','DESC')->limit(3)->get();
+        $products = Product::where('status',1)->orderBy('id','DESC')->limit(8)->get();
+        return view('frontend.index',compact('categories','slider','products'));
     }
 
     public function UserLogout(){
@@ -93,5 +99,10 @@ class IndexController extends Controller
             );
             return redirect()->back()->with($notification);
         }
+    }
+
+    public function ProductDetails($slug_en,$id){
+        $product = Product::findOrFail($id);
+        return view('frontend.product.product_details',compact('product'));
     }
 }

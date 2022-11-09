@@ -165,3 +165,9 @@ use App\Http\Controllers\LanguageController;
         Route::get('/language/french','French')->name('french.languange');
     });
 /* ========================================/BRAND======================================= */
+
+Route::controller(IndexController::class)->group(function(){
+
+    Route::get('/product/details/{id}/{slug_en}','ProductDetails')->name('product.details');
+
+});
