@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
-<title>Easy-Wab Shop</title>
+<title>@yield('title')</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
@@ -21,6 +21,8 @@
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/rateit.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap-select.min.css') }}">
+<link href="{{ asset('frontend/assets/css/lightbox.css') }}" rel="stylesheet">
+
 
 <!-- Icons/Glyphs -->
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.css') }}">
@@ -56,7 +58,7 @@
 <script src="{{ asset('frontend/assets/js/jquery.easing-1.3.min.js') }}"></script> 
 <script src="{{ asset('frontend/assets/js/bootstrap-slider.min.js') }}"></script> 
 <script src="{{ asset('frontend/assets/js/jquery.rateit.min.js') }}"></script> 
-<script type="text/javascript" src="{{ asset('frontend/assets/js/lightbox.min.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('frontend/assets/js/lightbox.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/bootstrap-select.min.js') }}"></script> 
 <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script> 
 <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
