@@ -7,6 +7,7 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Categorie;
+use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Product;
 
@@ -20,7 +21,11 @@ class IndexController extends Controller
         $hot_deals = Product::where('status',1)->where('hot_deals',1)->orderBy('id','DESC')->limit(5)->get();
         $special_offer = Product::where('status',1)->where('special_offer',1)->orderBy('id','DESC')->limit(9)->get();
         $special_deals = Product::where('status',1)->where('special_deals',1)->orderBy('id','DESC')->limit(9)->get();
-        return view('frontend.index',compact('categories','slider','products','featured','hot_deals','special_offer','special_deals'));
+
+        $brands = Brand::orderBy('brand_name_en','ASC')->get();
+    	
+
+        return view('frontend.index',compact('categories','slider','products','featured','hot_deals','special_offer','special_deals','brands'));
     }
 
     public function UserLogout(){
