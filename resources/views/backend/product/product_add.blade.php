@@ -234,7 +234,7 @@
                     <div class="form-group">
                         <h5>Product Discount Price <span class="text-danger">*</span></h5>
                         
-                        <input type="number" step="any" min="0" name="discount_price" class="form-control" required>
+                        <input type="number" step="any" min="0" name="discount_price" class="form-control">
                         @error('discount_price') 
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

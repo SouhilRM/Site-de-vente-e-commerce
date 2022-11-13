@@ -169,5 +169,5 @@ use App\Http\Controllers\LanguageController;
 Route::controller(IndexController::class)->group(function(){
 
     Route::get('/product/details/{id}/{slug_en}','ProductDetails')->name('product.details');
-
+    Route::get('/product/tag/{tag}','ProductTag')->name('product.tag');
 });
