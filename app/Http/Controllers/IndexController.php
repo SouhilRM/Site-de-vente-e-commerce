@@ -7,6 +7,8 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Categorie;
+use App\Models\SubCategorie;
+use App\Models\SubSubCategorie;
 use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Product;
@@ -114,19 +116,60 @@ class IndexController extends Controller
         return view('frontend.index',compact('categories','slider','products','featured','hot_deals','special_offer','special_deals','brands'));
     }//end methode
 
-    public function ProductDetails($slug_en,$id){
+    public function ProductDetails($id,$slug_en){
         $product = Product::findOrFail($id);
+
+        $color_en = $product->product_color_en;
+		$product_color_en = explode(',', $color_en);
+
+		$color_fr = $product->product_color_fr;
+		$product_color_fr = explode(',', $color_fr);
+
+		$size_en = $product->product_size_en;
+		$product_size_en = explode(',', $size_en);
+
+		$size_fr = $product->product_size_fr;
+		$product_size_fr = explode(',', $size_fr);
+        
         $hot_deals = Product::where('status',1)->where('hot_deals',1)->whereNot('discount_price',NULL)->orderBy('id','DESC')->limit(5)->get();
-        return view('frontend.product.product_details',compact('product','hot_deals'));
+
+		$relatedProduct = Product::where('categorie_id',$product->categorie_id)->whereNot('id',$id)->orderBy('id','DESC')->get();
+	 	
+        return view('frontend.product.product_details',compact('product','hot_deals','product_color_en','product_color_fr','product_size_en','product_size_fr','relatedProduct'));
     }//end methode
 
     public function productTag($tag)
     {
-        $products = Product::where('status', 1)->where('product_tags_en', 'LIKE', '%' . $tag . '%')->orWhere('product_tags_fr', 'LIKE', '%' . $tag . '%')->orderBy('id', 'DESC')->paginate(3);
+        //$products = Product::where('status', 1)->where('product_tags_en', 'LIKE', '%' . $tag . '%')->orWhere('product_tags_fr', 'LIKE', '%' . $tag . '%')->orderBy('id', 'DESC')->paginate(3);
 
+        $products = Product::where([
+            ['status', '=', '1'],
+            ['product_tags_en', 'LIKE', '%' . $tag . '%'],
+        ])->orWhere([
+            ['status', '=', '1'],
+            ['product_tags_fr', 'LIKE', '%' . $tag . '%'],
+        ])->orderBy('id', 'DESC')->paginate(9);
+       
         $categories = Categorie::orderBy('categorie_name_en','ASC')->get();
 
         $tag = $tag;
         return view('frontend.product.product_tag',compact('products','categories','tag'));
+    }//end methode
+
+    public function ProductSubcat($id,$slug_en){
+        $subcategory = SubCategorie::findOrFail($id);
+        $categories = Categorie::orderBy('categorie_name_en','ASC')->get();
+        $products = Product::where('status',1)->where('sub_categorie_id',$id)->orderBy('id','DESC')->paginate(12);
+        return view('frontend.product.product_subcat',compact('products','categories','subcategory'));
+    }//end methode
+
+    public function ProductSubSubcat($id,$slug_en){
+        $subcategory = SubSubCategorie::findOrFail($id);
+        $categories = Categorie::orderBy('categorie_name_en','ASC')->get();
+        $products = Product::where('status',1)->where('sub_sub_categorie_id',$id)->orderBy('id','DESC')->paginate(12);
+        if($products)
+            return view('frontend.product.product_subsubcat',compact('products','categories','subcategory'));
+        else
+            return view('frontend.index');
     }//end methode
 }

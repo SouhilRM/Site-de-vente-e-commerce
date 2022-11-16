@@ -5,7 +5,7 @@
     <div class="item">
         <div class="products">
         <div class="hot-deal-wrapper">
-            <div class="image"> <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}"><img src="{{ asset($product->product_thambnail) }}" alt=""> </div>
+            <div class="image"> <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}"><img src="{{ asset($product->product_thambnail) }}" alt=""> </div>
             @php
             $amount = $product->selling_price - $product->discount_price;
             $discount = ($amount/$product->selling_price) * 100;
@@ -34,7 +34,7 @@
         </div>
         <div class="product-info text-left m-t-20">
             <h3 class="name">
-                <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                     @if(session('language') == 'english'){{$product->product_name_en}}
                     @else {{$product->product_name_fr}} 
                     @endif

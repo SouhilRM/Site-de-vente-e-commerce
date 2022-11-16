@@ -178,16 +178,18 @@
                             @foreach($category->subcategories as $subcat)
                             <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
                               <h2 class="title">
+                                <a href="{{ route('product.subcat',[$subcat->id,$subcat->categorie_slug_en]) }}">
                                 @if(session('language') == 'english'){{$subcat->categorie_name_en}}
                                 @else {{$subcat->categorie_name_fr}} 
                                 @endif
+                                </a>
                               </h2>
                               <ul class="links">
                                 
 
                                 @foreach($subcat->subsubcategories as $subsubcat)
                                 <li>
-                                <a href="#">
+                                <a href="{{ route('product.subsubcat',[$subsubcat->id,$subsubcat->categorie_slug_en]) }}">
                                   @if(session('language') == 'english'){{$subsubcat->categorie_name_en}}
                                   @else {{$subsubcat->categorie_name_fr}} 
                                   @endif

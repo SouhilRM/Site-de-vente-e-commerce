@@ -13,13 +13,13 @@
                 <div class="row product-micro-row">
                 <div class="col col-xs-5">
                     <div class="product-image">
-                    <div class="image"> <a href="{{ route('product.details',[$special_deals[$k]->product_slug_en,$special_deals[$k]->id]) }}"> <img src="{{ asset($special_deals[$k]->product_thambnail) }}" alt=""> </a> </div>
+                    <div class="image"> <a href="{{ route('product.details',[$special_deals[$k]->id,$special_deals[$k]->product_slug_en]) }}"> <img src="{{ asset($special_deals[$k]->product_thambnail) }}" alt=""> </a> </div>
                     </div>
                 </div>
                 <div class="col col-xs-7">
                     <div class="product-info">
                     <h3 class="name">
-                        <a href="{{ route('product.details',[$special_deals[$k]->product_slug_en,$special_deals[$k]->id]) }}">
+                        <a href="{{ route('product.details',[$special_deals[$k]->id,$special_deals[$k]->product_slug_en]) }}">
                             @if(session('language') == 'english'){{$special_deals[$k]->product_name_en}}
                             @else {{$special_deals[$k]->product_name_fr}} 
                             @endif

@@ -170,4 +170,6 @@ Route::controller(IndexController::class)->group(function(){
 
     Route::get('/product/details/{id}/{slug_en}','ProductDetails')->name('product.details');
     Route::get('/product/tag/{tag}','ProductTag')->name('product.tag');
+    Route::get('/product/subcat/{id}/{slug_en}','ProductSubcat')->name('product.subcat');
+    Route::get('/product/subsubcat/{id}/{slug_en}','ProductSubSubcat')->name('product.subsubcat');
 });

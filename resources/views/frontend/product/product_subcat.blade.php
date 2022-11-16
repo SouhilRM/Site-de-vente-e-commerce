@@ -2,7 +2,9 @@
 @section('content')
 
 @section('title')
-    {{ $tag }} Product-Tag Easy-Web Shop
+    @if(session('language') == 'english'){{ $subcategory->categorie_name_en }} Products-Details Easy-Web Shop
+    @else {{ $subcategory->categorie_name_fr }} Products-Details Easy-Web Shop
+    @endif
 @endsection
 
 

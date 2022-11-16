@@ -162,7 +162,7 @@
                 <div class="products">
                     <div class="product">
                     <div class="product-image">
-                        <div class="image"> <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a> </div>
+                        <div class="image"> <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a> </div>
                         <!-- /.image -->
                         
                         @php
@@ -181,7 +181,7 @@
                     
                     <div class="product-info text-left">
                         <h3 class="name">
-                            <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                            <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                                 @if(session('language') == 'english'){{$product->product_name_en}}
                                 @else {{$product->product_name_fr}} 
                                 @endif
@@ -356,7 +356,7 @@
             <div class="products">
                 <div class="product">
                 <div class="product-image">
-                    <div class="image"> <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a> </div>
+                    <div class="image"> <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a> </div>
                     <!-- /.image -->
                     
                     @php
@@ -375,7 +375,7 @@
                 
                 <div class="product-info text-left">
                     <h3 class="name">
-                        <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                        <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                             @if(session('language') == 'english'){{$product->product_name_en}}
                             @else {{$product->product_name_fr}} 
                             @endif
@@ -486,7 +486,7 @@
                 <div class="products">
                     <div class="product">
                     <div class="product-image">
-                        <div class="image"> <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a> </div>
+                        <div class="image"> <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a> </div>
                         <!-- /.image -->
                         
                         @php
@@ -505,7 +505,7 @@
                     
                     <div class="product-info text-left">
                         <h3 class="name">
-                            <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                            <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                                 @if(session('language') == 'english'){{$product->product_name_en}}
                                 @else {{$product->product_name_fr}} 
                                 @endif
