@@ -196,7 +196,7 @@
 						
 						<div class="row">
 							<div class="col-sm-6">
-
+								@if($product_color_en[0])
 								<div class="form-group">
 								
 									<label class="info-title control-label">Choose Color <span> </span></label>
@@ -216,11 +216,11 @@
 									</select> 
 								
 								</div> <!-- // end form group -->
-								
+								@endif
 									</div> <!-- // end col 6 -->
 								
 										<div class="col-sm-6">
-								
+								@if($product_size_en[0])
 								<div class="form-group">
 								
 									<label class="info-title control-label">Choose Size <span> </span></label>
@@ -239,7 +239,7 @@
 									</select> 
 								
 								</div> <!-- // end form group -->
-								
+								@endif
 								
 										</div> <!-- // end col 6 -->
 								
