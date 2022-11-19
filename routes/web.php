@@ -10,6 +10,7 @@ use App\Http\Controllers\SubSubCategorieController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\CartController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -172,6 +173,15 @@ Route::controller(IndexController::class)->group(function(){
     Route::get('/product/tag/{tag}','ProductTag')->name('product.tag');
     Route::get('/product/subcat/{id}/{slug_en}','ProductSubcat')->name('product.subcat');
     Route::get('/product/subsubcat/{id}/{slug_en}','ProductSubSubcat')->name('product.subsubcat');
-    Route::get('/product/view/modal/{id}','ProductViewAjax');
-    ////url:"{{ route('product.view.modal') }}" + '/' + id,   marche aussi !!
+    Route::get('/product/view/modal/{id}','ProductViewAjax'); ////url:"{{ route('product.view.modal') }}" + '/' + id,   marche aussi !!
+    
+    
+});
+
+Route::controller(CartController::class)->group(function(){
+
+    Route::post('/cart/data/store/{id}','AddToCart');
+    Route::get('/product/mini/cart','AddMiniCart');
+    Route::get('/minicart/product-remove/{rowId}','RemoveMiniCart');
+    
 });

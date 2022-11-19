@@ -65,6 +65,8 @@
 <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
 <!-- Toaster -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- SweetAlert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         
 @if(Session::has('message'))
     <script>
@@ -97,7 +99,8 @@
         <h5 class="modal-title" id="exampleModalLabel">
             <strong><span id="pname"></span></strong>
         </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <input type="hidden" id="product_id">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModel">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -129,26 +132,25 @@
 
         <div class="col-md-4">
             <div class="form-group" id="colorArea">
-                <label for="exampleFormControlSelect1">Choose Color</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="color">
+                <label for="color">Choose Color</label>
+                <select class="form-control" id="color" name="color">
                 
                 </select>
             </div>
-        
 
             <div class="form-group" id="sizeArea">
-                <label for="exampleFormControlSelect1">Choose Size</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="size">
+                <label for="size">Choose Size</label>
+                <select class="form-control" id="size" name="size">
                 
                 </select>
             </div>  <!-- // end form group -->
 
             <div class="form-group">
-                <label for="exampleFormControlInput1">Quantity</label>
-                <input type="number" class="form-control" id="exampleFormControlInput1" value="1" min="1" >
+                <label for="qty">Quantity</label>
+                <input type="number" class="form-control" id="qty" value="1" min="1" >
             </div> <!-- // end form group -->
         </div><!-- // end col md -->
-        <button type="submit" class="btn btn-primary mb-2">Add to Cart</button>
+        <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()" >Add to Cart</button>
 
     </div> <!-- // end row -->
     </div> <!-- // end modal Body -->
@@ -178,6 +180,9 @@
             $('#pcategory').text(data.product.category.categorie_name_en);
             $('#pbrand').text(data.product.brand.brand_name_en);
             $('#pimage').attr('src','/'+data.product.product_thambnail);
+
+            $('#product_id').val(id);
+            $('#qty').val(1);
                 
             // Product Price 
             if (data.product.discount_price == null) {
@@ -225,7 +230,133 @@
             }
         })
     }
+
+    // Start Add To Cart Product 
+    function addToCart(){
+        var product_name = $('#pname').text();
+        var id = $('#product_id').val();
+        var color = $('#color option:selected').text();
+        var size = $('#size option:selected').text();
+        var quantity = $('#qty').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data:{
+                color:color, 
+                size:size, 
+                quantity:quantity, 
+                product_name:product_name
+            },
+            url: "/cart/data/store/"+id,
+            success:function(data){
+                
+                miniCart()
+                $('#closeModel').click();
+                // console.log(data)
+                // Start Message 
+                const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      icon: 'success',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success
+                    })
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        title: data.error
+                    })
+                }
+                // End Message 
+            }
+        })
+    }
+
 </script>
+
+<script type="text/javascript">
+    function miniCart(){
+       $.ajax({
+           type: 'GET',
+           url: '/product/mini/cart',
+           dataType:'json',
+           success:function(response){
+
+                $('span[id="cartSubTotal"]').text(response.cartTotal);
+                $('#cartQty').text(response.cartQty);
+                var miniCart = ""
+
+                $.each(response.carts, function(key,value){
+                    miniCart += 
+                    `
+                    <div class="cart-item product-summary">
+                        <div class="row">
+                        <div class="col-xs-4">
+                            <div class="image"> 
+                                <a href=""><img src="/${value.options.image}" alt=""></a> 
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <h3 class="name">
+                                <a href="">${value.name}</a>
+                            </h3>
+                            <div class="price"> ${value.price} * ${value.qty} </div>
+                        </div>
+                        <div class="col-xs-1 action"> 
+                            <div class="col-xs-1 action"> 
+                            <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                    `
+                });
+                $('#miniCart').html(miniCart);
+           }
+       })
+    }
+    miniCart();
+
+    // mini cart remove Start 
+    function miniCartRemove(rowId){
+        $.ajax({
+            type: 'GET',
+            url: '/minicart/product-remove/'+rowId,
+            dataType:'json',
+            success:function(data){
+            miniCart();
+             // Start Message 
+                const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      icon: 'success',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+                if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success
+                    })
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        title: data.error
+                    })
+                }
+                // End Message 
+            }
+        });
+    }
+    // mini cart remove end
+</script>
+
 
 </body>
 </html>
