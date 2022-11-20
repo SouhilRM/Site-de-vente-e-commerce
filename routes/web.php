@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\WishlistController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -174,8 +175,6 @@ Route::controller(IndexController::class)->group(function(){
     Route::get('/product/subcat/{id}/{slug_en}','ProductSubcat')->name('product.subcat');
     Route::get('/product/subsubcat/{id}/{slug_en}','ProductSubSubcat')->name('product.subsubcat');
     Route::get('/product/view/modal/{id}','ProductViewAjax'); ////url:"{{ route('product.view.modal') }}" + '/' + id,   marche aussi !!
-    
-    
 });
 
 Route::controller(CartController::class)->group(function(){
@@ -183,5 +182,13 @@ Route::controller(CartController::class)->group(function(){
     Route::post('/cart/data/store/{id}','AddToCart');
     Route::get('/product/mini/cart','AddMiniCart');
     Route::get('/minicart/product-remove/{rowId}','RemoveMiniCart');
-    
+    Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
+});
+
+Route::controller(WishlistController::class)->group(function(){
+
+    Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
+    Route::get('/wishlist','ViewWishlist')->name('wishlist');
+    Route::get('/get-wishlist-product','GetWishlistProduct');
+    Route::get('/wishlist-remove/{id}','RemoveWishlistProduct');
 });

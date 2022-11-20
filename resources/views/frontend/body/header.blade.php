@@ -7,7 +7,7 @@
           <div class="cnt-account">
             <ul class="list-unstyled">
               <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-              <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+              <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
               <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
               <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
               <li>
@@ -104,7 +104,7 @@
                   <span class="lbl">cart -</span> 
                   <span class="total-price"> 
                     <span class="sign">$</span>
-                    <span class="value" id="cartSubTotal"> </span> 
+                    <span class="value" id="cartSubTotal"></span> 
                   </span> 
                 </div>
 
@@ -121,6 +121,7 @@
 
                     <div class="pull-right"> 
                       <span class="text">Sub Total :</span>
+                      <span class="sign">$</span>
                       <span class="price" id="cartSubTotal"> </span> 
                     </div>
 
