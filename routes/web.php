@@ -146,7 +146,7 @@ use App\Http\Controllers\WishlistController;
     });
 /* =======================================/PRODUCT======================================= */
 
-/* ========================================BRAND======================================= */
+/* =====================================SLIDER======================================= */
     Route::controller(SliderController::class)->prefix('/slider')->group(function(){
 
         Route::middleware(['auth:admin'])->group(function () {
@@ -159,36 +159,43 @@ use App\Http\Controllers\WishlistController;
             Route::get('/active/{id}','ActiveSlider')->name('active.slider');
         }); 
     });
-/* ========================================/BRAND======================================= */
+/* =====================================/SLIDER======================================= */
 
-/* ========================================BRAND======================================= */
+/* ========================================LANGUE======================================= */
     Route::controller(LanguageController::class)->group(function(){
         Route::get('/language/english','English')->name('english.languange');
         Route::get('/language/french','French')->name('french.languange');
     });
-/* ========================================/BRAND======================================= */
+/* ========================================/LANGUE======================================= */
 
-Route::controller(IndexController::class)->group(function(){
+/* ========================================TAG======================================= */
+    Route::controller(IndexController::class)->group(function(){
 
-    Route::get('/product/details/{id}/{slug_en}','ProductDetails')->name('product.details');
-    Route::get('/product/tag/{tag}','ProductTag')->name('product.tag');
-    Route::get('/product/subcat/{id}/{slug_en}','ProductSubcat')->name('product.subcat');
-    Route::get('/product/subsubcat/{id}/{slug_en}','ProductSubSubcat')->name('product.subsubcat');
-    Route::get('/product/view/modal/{id}','ProductViewAjax'); ////url:"{{ route('product.view.modal') }}" + '/' + id,   marche aussi !!
-});
+        Route::get('/product/details/{id}/{slug_en}','ProductDetails')->name('product.details');
+        Route::get('/product/tag/{tag}','ProductTag')->name('product.tag');
+        Route::get('/product/subcat/{id}/{slug_en}','ProductSubcat')->name('product.subcat');
+        Route::get('/product/subsubcat/{id}/{slug_en}','ProductSubSubcat')->name('product.subsubcat');
+        Route::get('/product/view/modal/{id}','ProductViewAjax'); ////url:"{{ route('product.view.modal') }}" + '/' + id,   marche aussi !!
+    });
+/* =======================================/TAG======================================= */
 
-Route::controller(CartController::class)->group(function(){
+/* ==================================MINI-CART===================================== */
+    Route::controller(CartController::class)->group(function(){
 
-    Route::post('/cart/data/store/{id}','AddToCart');
-    Route::get('/product/mini/cart','AddMiniCart');
-    Route::get('/minicart/product-remove/{rowId}','RemoveMiniCart');
-    Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
-});
+        Route::post('/cart/data/store/{id}','AddToCart');
+        Route::get('/product/mini/cart','AddMiniCart');
+        Route::get('/minicart/product-remove/{rowId}','RemoveMiniCart');
+        Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
+    });
+/* ==================================/MINI-CART===================================== */
 
-Route::controller(WishlistController::class)->group(function(){
-
-    Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
-    Route::get('/wishlist','ViewWishlist')->name('wishlist');
-    Route::get('/get-wishlist-product','GetWishlistProduct');
-    Route::get('/wishlist-remove/{id}','RemoveWishlistProduct');
-});
+/* =====================================WISHLIST======================================= */
+    Route::controller(WishlistController::class)->group(function(){
+        Route::middleware(['auth'])->group(function () {
+            Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
+            Route::get('/wishlist','ViewWishlist')->name('wishlist');
+            Route::get('/get-wishlist-product','GetWishlistProduct');
+            Route::get('/wishlist-remove/{id}','RemoveWishlistProduct');
+        });
+    });
+/* =====================================/WISHLIST======================================= */
