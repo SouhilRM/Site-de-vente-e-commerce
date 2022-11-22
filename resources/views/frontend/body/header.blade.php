@@ -6,9 +6,9 @@
         <div class="header-top-inner">
           <div class="cnt-account">
             <ul class="list-unstyled">
-              <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
+              <li><a href=""><i class="icon fa fa-user"></i>My Account</a></li>
               <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-              <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+              <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
               <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
               <li>
 
@@ -63,7 +63,7 @@
             <!-- ============================================================= LOGO : END ============================================================= --> </div>
           <!-- /.logo-holder -->
           
-          <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder"> 
+          <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder"> 
             <!-- /.contact-row --> 
             <!-- ============================================================= SEARCH AREA ============================================================= -->
             <div class="search-area">
@@ -88,7 +88,7 @@
             <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
           <!-- /.top-search-holder -->
           
-        <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
+        <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row">
             
             
           <!-- =================== SHOPPING CART DROPDOWN ======================= -->

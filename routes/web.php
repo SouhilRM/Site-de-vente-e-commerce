@@ -12,6 +12,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CartPageController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -199,3 +200,15 @@ use App\Http\Controllers\WishlistController;
         });
     });
 /* =====================================/WISHLIST======================================= */
+
+/* =====================================MYCART======================================= */
+    Route::controller(CartPageController::class)->group(function(){
+        //pas de middlware pour ca
+        Route::get('/mycart','MyCart')->name('mycart');
+        Route::get('/get-cart-product','GetCartProduct');
+        Route::get('/cart-remove/{rowId}','RemoveCartProduct');
+        Route::get('/cart-increment/{rowId}','CartIncrement');
+        Route::get('/cart-decrement/{rowId}','CartDecrement');
+    });
+/* =====================================/MYCART======================================= */
+
