@@ -403,6 +403,8 @@
            success:function(response){
                var rows = ""
                $.each(response, function(key,value){
+                //en attendant jucequa ce que tu le fasse proprement avec cle etrangere + supression en cascade
+                if(value.product){
                     rows += `
                     <tr>
                     <td class="col-md-2">
@@ -430,6 +432,7 @@
                     </td>
                     </tr>
                     `
+                }
                 });
                $('#wishlist').html(rows);
             }

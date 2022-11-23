@@ -13,6 +13,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartPageController;
+use App\Http\Controllers\CouponController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -192,8 +193,8 @@ use App\Http\Controllers\CartPageController;
 
 /* =====================================WISHLIST======================================= */
     Route::controller(WishlistController::class)->group(function(){
+        Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
         Route::middleware(['auth'])->group(function () {
-            Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
             Route::get('/wishlist','ViewWishlist')->name('wishlist');
             Route::get('/get-wishlist-product','GetWishlistProduct');
             Route::get('/wishlist-remove/{id}','RemoveWishlistProduct');
@@ -212,3 +213,15 @@ use App\Http\Controllers\CartPageController;
     });
 /* =====================================/MYCART======================================= */
 
+/* =====================================COUPON======================================= */
+Route::controller(CouponController::class)->prefix('/coupon')->group(function(){
+
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::get('/view','CouponView')->name('manage-coupon');
+        Route::post('/store','CouponStore')->name('coupon.store');
+        Route::get('/edit/{id}','CouponEdit')->name('coupon.edit');
+        Route::post('/update/{id}','CouponUpdate')->name('coupon.update');
+        Route::get('/delete/{id}','CouponDelete')->name('coupon.delete');
+    }); 
+});
+/* =====================================/COUPON======================================= */
