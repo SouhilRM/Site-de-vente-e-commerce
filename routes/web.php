@@ -14,6 +14,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartPageController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\ShippingAreaController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -214,14 +215,41 @@ use App\Http\Controllers\CouponController;
 /* =====================================/MYCART======================================= */
 
 /* =====================================COUPON======================================= */
-Route::controller(CouponController::class)->prefix('/coupon')->group(function(){
+    Route::controller(CouponController::class)->prefix('/coupon')->group(function(){
 
-    Route::middleware(['auth:admin'])->group(function () {
-        Route::get('/view','CouponView')->name('manage-coupon');
-        Route::post('/store','CouponStore')->name('coupon.store');
-        Route::get('/edit/{id}','CouponEdit')->name('coupon.edit');
-        Route::post('/update/{id}','CouponUpdate')->name('coupon.update');
-        Route::get('/delete/{id}','CouponDelete')->name('coupon.delete');
-    }); 
-});
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/view','CouponView')->name('manage-coupon');
+            Route::post('/store','CouponStore')->name('coupon.store');
+            Route::get('/edit/{id}','CouponEdit')->name('coupon.edit');
+            Route::post('/update/{id}','CouponUpdate')->name('coupon.update');
+            Route::get('/delete/{id}','CouponDelete')->name('coupon.delete');
+        }); 
+    });
 /* =====================================/COUPON======================================= */
+
+/* ==================================ShippingArea=================================== */
+    Route::controller(ShippingAreaController::class)->prefix('/shipping')->group(function(){
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/division/view','DivisionView')->name('manage-division');
+            Route::post('/division/store','DivisionStore')->name('division.store');
+            Route::get('/division/edit/{id}','DivisionEdit')->name('division.edit');
+            Route::post('/division/update/{id}','DivisionUpdate')->name('division.update');
+            Route::get('/division/delete/{id}','DivisionDelete')->name('division.delete');
+
+            Route::get('/district/view','DistrictView')->name('manage-district');
+            Route::post('/district/store','DistrictStore')->name('district.store');
+            Route::get('/district/edit/{id}','DistrictEdit')->name('district.edit');
+            Route::post('/district/update/{id}','DistrictUpdate')->name('district.update');
+            Route::get('/district/delete/{id}','DistrictDelete')->name('district.delete');
+
+            Route::get('/state/view','StateView')->name('manage-state');
+            Route::post('/state/store','StateStore')->name('state.store');
+            Route::get('/state/edit/{id}','StateEdit')->name('state.edit');
+            Route::post('/state/update/{id}','StateUpdate')->name('state.update');
+            Route::get('/state/delete/{id}','StateDelete')->name('state.delete');
+            Route::get('/district/ajax/{division_id}','GetDistrict');
+
+            }); 
+    });
+/* ==================================/ShippingArea=================================== */
+
