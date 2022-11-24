@@ -253,3 +253,11 @@ use App\Http\Controllers\ShippingAreaController;
     });
 /* ==================================/ShippingArea=================================== */
 
+/* ==================================FRONT-END COUPON================================= */
+    Route::controller(CartController::class)->group(function(){
+
+        Route::post('/coupon-apply','CouponApply');
+        Route::get('/coupon-calculation','CouponCalculation');
+        Route::get('/coupon-remove','CouponRemove');
+    });
+/* ==================================/FRONT-END COUPON================================= */
