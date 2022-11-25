@@ -261,3 +261,12 @@ use App\Http\Controllers\ShippingAreaController;
         Route::get('/coupon-remove','CouponRemove');
     });
 /* ==================================/FRONT-END COUPON================================= */
+
+/* ==================================Checkout================================= */
+    Route::controller(CartController::class)->group(function(){
+
+        Route::get('/checkout','CheckoutCreate')->name('checkout');
+        
+    });
+/* ==================================/Checkout================================= */
+
