@@ -15,6 +15,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartPageController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ShippingAreaController;
+use App\Http\Controllers\CheckoutController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -268,5 +269,13 @@ use App\Http\Controllers\ShippingAreaController;
         Route::get('/checkout','CheckoutCreate')->name('checkout');
         
     });
-/* ==================================/Checkout================================= */
 
+    Route::controller(CheckoutController::class)->group(function(){
+
+        Route::get('/district-get/ajax/{division_id}','DistrictGetAjax');
+        Route::get('/state-get/ajax/{district_id}','StateGetAjax');
+        Route::post('/checkout/store','CheckoutStore')->name('checkout.store');
+
+
+    });
+/* ==================================/Checkout================================= */

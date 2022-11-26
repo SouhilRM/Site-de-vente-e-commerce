@@ -7,6 +7,7 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Coupon;
 use Carbon\Carbon;
+use App\Models\ShipDivision;
 use Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -122,7 +123,8 @@ class CartController extends Controller
 				$carts = Cart::content();
 				$cartQty = Cart::count();
 				$cartTotal = Cart::total();
-        		return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal'));
+				$divisions = ShipDivision::orderBy('division_name','ASC')->get();
+        		return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal','divisions'));
             }else{
 				$notification = array(
 				'message' => 'Shopping At list One Product',
