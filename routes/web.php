@@ -16,6 +16,7 @@ use App\Http\Controllers\CartPageController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ShippingAreaController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\StripeController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -279,3 +280,12 @@ use App\Http\Controllers\CheckoutController;
 
     });
 /* ==================================/Checkout================================= */
+
+/* ==================================STRIPE-PAYMENT=============================== */
+    Route::controller(StripeController::class)->group(function(){
+
+        Route::middleware(['auth'])->group(function () {
+            Route::post('/stripe/order','StripeOrder')->name('stripe.order');
+        });
+    });
+/* ==================================/STRIPE-PAYMENT=============================== */
