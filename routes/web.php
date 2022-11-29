@@ -17,6 +17,8 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ShippingAreaController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\AllUserController;
+use App\Http\Controllers\CashController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -289,3 +291,16 @@ use App\Http\Controllers\StripeController;
         });
     });
 /* ==================================/STRIPE-PAYMENT=============================== */
+
+/* ========================================ALLUsers==================================== */
+    Route::controller(AllUserController::class)->prefix('/user')->group(function(){
+
+        Route::middleware(['auth'])->group(function () {
+            Route::get('/my/orders','MyOrders')->name('my.orders');
+            Route::get('/order_details/{order_id}','OrderDetails');
+        }); 
+    });
+/* ========================================/ALLUsers==================================== */
+
+//CASH-ROUTE
+Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
