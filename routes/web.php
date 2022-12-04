@@ -19,6 +19,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\AllUserController;
 use App\Http\Controllers\CashController;
+use App\Http\Controllers\OrderController;
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -306,4 +307,18 @@ use App\Http\Controllers\CashController;
 //CASH-ROUTE
 Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
+/* =====================================ORDERS===================================== */
+    Route::controller(OrderController::class)->prefix('/orders')->group(function(){
 
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/pending/orders','PendingOrders')->name('pending-orders');
+            Route::get('/pending/orders/details/{order_id}','PendingOrdersDetails')->name('pending.order.details');
+            Route::get('/confirmed/orders','ConfirmedOrders')->name('confirmed-orders');
+            Route::get('/processing/orders','ProcessingOrders')->name('processing-orders');
+            Route::get('/picked/orders','PickedOrders')->name('picked-orders');
+            Route::get('/shipped/orders','ShippedOrders')->name('shipped-orders');
+            Route::get('/delivered/orders','DeliveredOrders')->name('delivered-orders');
+            Route::get('/cancel/orders','CancelOrders')->name('cancel-orders');
+        }); 
+    });
+/* =====================================/ORDERS===================================== */
