@@ -1,25 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\SubCategorieController;
-use App\Http\Controllers\SubSubCategorieController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SliderController;
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\WishlistController;
-use App\Http\Controllers\CartPageController;
-use App\Http\Controllers\CouponController;
-use App\Http\Controllers\ShippingAreaController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\StripeController;
-use App\Http\Controllers\AllUserController;
-use App\Http\Controllers\CashController;
-use App\Http\Controllers\OrderController;
+//controllers
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\AdminController;
+    use App\Http\Controllers\IndexController;
+    use App\Http\Controllers\BrandController;
+    use App\Http\Controllers\CategorieController;
+    use App\Http\Controllers\SubCategorieController;
+    use App\Http\Controllers\SubSubCategorieController;
+    use App\Http\Controllers\ProductController;
+    use App\Http\Controllers\SliderController;
+    use App\Http\Controllers\LanguageController;
+    use App\Http\Controllers\CartController;
+    use App\Http\Controllers\WishlistController;
+    use App\Http\Controllers\CartPageController;
+    use App\Http\Controllers\CouponController;
+    use App\Http\Controllers\ShippingAreaController;
+    use App\Http\Controllers\CheckoutController;
+    use App\Http\Controllers\StripeController;
+    use App\Http\Controllers\AllUserController;
+    use App\Http\Controllers\CashController;
+    use App\Http\Controllers\OrderController;
+//end-controllers
 
 /* =======================================ADMIN======================================== */
     Route::middleware([
@@ -313,12 +315,18 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
         Route::middleware(['auth:admin'])->group(function () {
             Route::get('/pending/orders','PendingOrders')->name('pending-orders');
             Route::get('/pending/orders/details/{order_id}','PendingOrdersDetails')->name('pending.order.details');
+
             Route::get('/confirmed/orders','ConfirmedOrders')->name('confirmed-orders');
             Route::get('/processing/orders','ProcessingOrders')->name('processing-orders');
             Route::get('/picked/orders','PickedOrders')->name('picked-orders');
             Route::get('/shipped/orders','ShippedOrders')->name('shipped-orders');
             Route::get('/delivered/orders','DeliveredOrders')->name('delivered-orders');
             Route::get('/cancel/orders','CancelOrders')->name('cancel-orders');
+        
+            // Update Order Status
+            Route::get('status/update/{id}/{status}','updateStatus')->name('order.updateStatus');
+
+            Route::get('/invoice/download/{order_id}','AdminInvoiceDownload')->name('invoice.download');
         }); 
     });
 /* =====================================/ORDERS===================================== */

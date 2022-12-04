@@ -132,7 +132,38 @@
                 <span class="badge badge-pill badge-warning" style="background: #418DB9;">{{ $order->status }} </span> </th>
             </tr>
 
+            <tr>
+              <th>ssss</th>
+              <th>
+                @switch(" ".$order->status )
 
+                    @case(" Pending")
+                      <a id="updateStatus" href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'confirm']) }}" class="btn btn-success btn-block">Confirmed Order</a>
+                    @break
+
+                    @case(" confirm")
+                      <a id="updateStatus" href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'processing']) }}" class="btn btn-success btn-block">Processing Order</a>
+                    @break
+
+                    @case(" processing")
+                      <a id="updateStatus"  href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'picked']) }}" class="btn btn-success btn-block">Picked Order</a>
+                    @break
+
+                    @case(" picked")
+                      <a id="updateStatus" href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'shipped']) }}" class="btn btn-success btn-block">Shipped Order</a>
+                    @break
+
+                    @case(" shipped")
+                      <a id="updateStatus"  href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'delivered']) }}" class="btn btn-success btn-block">Delivered Order</a>
+                    @break
+
+                    @case(" delivered")
+                      <a id="updateStatus"  href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'cancel']) }}" class="btn btn-success btn-block">Canceled Order</a>
+                    @break
+                    
+                @endswitch
+              </th>
+          </tr>
 
            </table>
 
