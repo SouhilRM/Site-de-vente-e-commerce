@@ -302,6 +302,9 @@
             Route::get('/my/orders','MyOrders')->name('my.orders');
             Route::get('/order_details/{order_id}','OrderDetails');
             Route::get('/invoice_download/{order_id}','InvoiceDownload');
+            Route::post('/return/order/{order_id}','ReturnOrder')->name('return.order');
+            Route::get('/return/order/list','ReturnOrderList')->name('return.order.list');
+            Route::get('/cancel/orders','CancelOrders')->name('cancel.orders');
         }); 
     });
 /* ========================================/ALLUsers==================================== */
