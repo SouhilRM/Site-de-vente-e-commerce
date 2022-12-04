@@ -298,9 +298,12 @@ use App\Http\Controllers\CashController;
         Route::middleware(['auth'])->group(function () {
             Route::get('/my/orders','MyOrders')->name('my.orders');
             Route::get('/order_details/{order_id}','OrderDetails');
+            Route::get('/invoice_download/{order_id}','InvoiceDownload');
         }); 
     });
 /* ========================================/ALLUsers==================================== */
 
 //CASH-ROUTE
 Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
+
+
