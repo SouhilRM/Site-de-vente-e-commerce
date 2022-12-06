@@ -21,6 +21,7 @@
     use App\Http\Controllers\AllUserController;
     use App\Http\Controllers\CashController;
     use App\Http\Controllers\OrderController;
+    use App\Http\Controllers\ReportController;
 //end-controllers
 
 /* =======================================ADMIN======================================== */
@@ -333,3 +334,15 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
         }); 
     });
 /* =====================================/ORDERS===================================== */
+
+/* ========================================BRAND======================================= */
+    Route::controller(ReportController::class)->prefix('/reports')->group(function(){
+
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/view','ReportView')->name('all-reports');
+            Route::post('/search/by/date','ReportByDate')->name('search-by-date');
+            Route::post('/search/by/month','ReportByMonth')->name('search-by-month');
+            Route::post('/search/by/year','ReportByYear')->name('search-by-year');
+        }); 
+    });
+/* ========================================/BRAND======================================= */
