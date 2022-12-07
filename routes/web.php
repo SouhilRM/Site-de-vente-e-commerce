@@ -22,6 +22,7 @@
     use App\Http\Controllers\CashController;
     use App\Http\Controllers\OrderController;
     use App\Http\Controllers\ReportController;
+    use App\Http\Controllers\AdminProfileController;
 //end-controllers
 
 /* =======================================ADMIN======================================== */
@@ -59,6 +60,7 @@
 /* ======================================/ADMIN======================================== */
 
 /* ========================================USER======================================== */
+    /*
     Route::middleware([
         
         'auth:sanctum',
@@ -72,11 +74,18 @@
         })->name('dashboard');
 
     });
+    */
+
+    //le dashboard qu'on a mis hors controller 
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard')->middleware(['user']);
+
     Route::controller(IndexController::class)->group(function(){
 
         Route::get('/','Index')->name('home');
 
-        Route::middleware(['auth'])->group(function () {
+        Route::middleware(['user'])->group(function () {
             Route::get('/user/logout','UserLogout')->name('user.logout');
             Route::get('/user/profile','UserProfile')->name('user.profile');
             Route::post('/user/profile/store','UserProfileStore')->name('user.profile.store');
@@ -203,7 +212,7 @@
 /* =====================================WISHLIST======================================= */
     Route::controller(WishlistController::class)->group(function(){
         Route::post('/add-to-wishlist/{product_id}','AddToWishlist');
-        Route::middleware(['auth'])->group(function () {
+        Route::middleware(['user'])->group(function () {
             Route::get('/wishlist','ViewWishlist')->name('wishlist');
             Route::get('/get-wishlist-product','GetWishlistProduct');
             Route::get('/wishlist-remove/{id}','RemoveWishlistProduct');
@@ -335,7 +344,7 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
     });
 /* =====================================/ORDERS===================================== */
 
-/* ========================================BRAND======================================= */
+/* ========================================REPORT===================================== */
     Route::controller(ReportController::class)->prefix('/reports')->group(function(){
 
         Route::middleware(['auth:admin'])->group(function () {
@@ -345,4 +354,14 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
             Route::post('/search/by/year','ReportByYear')->name('search-by-year');
         }); 
     });
-/* ========================================/BRAND======================================= */
+/* ========================================/REPORT===================================== */
+
+/* ========================================REPORT===================================== */
+    Route::controller(AdminProfileController::class)->prefix('/alluser')->group(function(){
+
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/view','AllUsers')->name('all-users');
+        }); 
+    });
+/* ========================================/REPORT===================================== */
+
