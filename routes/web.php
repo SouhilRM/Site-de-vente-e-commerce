@@ -23,6 +23,7 @@
     use App\Http\Controllers\OrderController;
     use App\Http\Controllers\ReportController;
     use App\Http\Controllers\AdminProfileController;
+    use App\Http\Controllers\SiteSettingController;
 //end-controllers
 
 /* =======================================ADMIN======================================== */
@@ -356,12 +357,24 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
     });
 /* ========================================/REPORT===================================== */
 
-/* ========================================REPORT===================================== */
+/* ================================GESTION-USER-back===================================== */
     Route::controller(AdminProfileController::class)->prefix('/alluser')->group(function(){
 
         Route::middleware(['auth:admin'])->group(function () {
             Route::get('/view','AllUsers')->name('all-users');
         }); 
     });
-/* ========================================/REPORT===================================== */
+/* ===============================/GESTION-USER-back===================================== */
 
+/* ===================================OPTION-du-SITE===================================== */
+    Route::controller(SiteSettingController::class)->prefix('/brand')->group(function(){
+
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/site','SiteSetting')->name('site.setting');
+            Route::post('/site/update','SiteSettingUpdate')->name('update.sitesetting');
+
+            Route::get('/seo','SeoSetting')->name('seo.setting');
+            Route::post('/seo/update','SeoSettingUpdate')->name('update.seosetting');
+        }); 
+    });
+/* ===================================/OPTION-du-SITE===================================== */
