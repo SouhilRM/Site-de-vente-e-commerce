@@ -14,7 +14,7 @@ class OrderController extends Controller
 {
 	// Pending Orders 
 	public function PendingOrders(){
-		$orders = Order::where('status','Pending')->orderBy('id','DESC')->get();
+		$orders = Order::where('status','pending')->orderBy('id','DESC')->get();
 		return view('backend.orders.pending_orders',compact('orders'));
 	} // end mehtod 
 
@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     // Confirmed Orders 
 	public function ConfirmedOrders(){
-		$orders = Order::where('status','confirm')->orderBy('id','DESC')->get();
+		$orders = Order::where('status','confirmed')->orderBy('id','DESC')->get();
 		return view('backend.orders.confirmed_orders',compact('orders'));
 	} // end mehtod 
 

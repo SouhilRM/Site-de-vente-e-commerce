@@ -137,11 +137,11 @@
               <th>
                 @switch(" ".$order->status )
 
-                    @case(" Pending")
-                      <a id="updateStatus" href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'confirm']) }}" class="btn btn-success btn-block">Confirmed Order</a>
+                    @case(" pending")
+                      <a id="updateStatus" href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'confirmed']) }}" class="btn btn-success btn-block">Confirmed Order</a>
                     @break
 
-                    @case(" confirm")
+                    @case(" confirmed")
                       <a id="updateStatus" href="{{ route('order.updateStatus',['id' => $order->id, 'status' => 'processing']) }}" class="btn btn-success btn-block">Processing Order</a>
                     @break
 
