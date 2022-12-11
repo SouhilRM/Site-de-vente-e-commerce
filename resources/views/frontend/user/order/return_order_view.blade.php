@@ -34,7 +34,7 @@
                 </td>
 
                  <td class="col-md-1">
-                  <label for=""> Order Number </label>
+                  <label for=""> Order Reason  </label>
                 </td>
 
                  <td class="col-md-2">
@@ -64,7 +64,7 @@
                 </td>
 
                 <td class="col-md-2">
-                  <label for=""> {{ $order->order_number }}</label>
+                  <label for=""> {{ $order->return_reason }}</label>
                 </td>
 
                  <td class="col-md-2">

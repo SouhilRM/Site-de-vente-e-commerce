@@ -24,6 +24,7 @@
     use App\Http\Controllers\ReportController;
     use App\Http\Controllers\AdminProfileController;
     use App\Http\Controllers\SiteSettingController;
+    use App\Http\Controllers\ReturnController;
 //end-controllers
 
 /* =======================================ADMIN======================================== */
@@ -378,3 +379,14 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
         }); 
     });
 /* ===================================/OPTION-du-SITE===================================== */
+
+/* ========================================BRAND======================================= */
+    Route::controller(ReturnController::class)->prefix('/return')->group(function(){
+
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/admin/request','ReturnRequest')->name('return.request');
+            Route::get('/admin/return/approve/{order_id}','ReturnRequestApprove')->name('return.approve');
+            Route::get('/admin/all/request','ReturnAllRequest')->name('all.request');
+        }); 
+    });
+/* ========================================/BRAND======================================= */
