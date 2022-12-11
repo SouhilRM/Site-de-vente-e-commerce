@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Models\Multi_image;
 use App\Models\Brand;
 use App\Models\Categorie;
+use App\Models\Review;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,5 +24,9 @@ class Product extends Model
     
     public function brand(){
     	return $this->belongsTo(Brand::class,'brand_id','id');
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
 }

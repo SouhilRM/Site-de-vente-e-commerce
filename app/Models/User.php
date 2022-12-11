@@ -11,6 +11,8 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Cache;
 
+use App\Models\Review;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -65,5 +67,9 @@ class User extends Authenticatable
     // User Active Show
     public function UserOnline(){
         return Cache::has('user-is-online' . $this->id);
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
 }

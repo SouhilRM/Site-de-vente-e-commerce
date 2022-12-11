@@ -25,6 +25,7 @@
     use App\Http\Controllers\AdminProfileController;
     use App\Http\Controllers\SiteSettingController;
     use App\Http\Controllers\ReturnController;
+    use App\Http\Controllers\ReviewController;
 //end-controllers
 
 /* =======================================ADMIN======================================== */
@@ -348,7 +349,6 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
 
 /* ========================================REPORT===================================== */
     Route::controller(ReportController::class)->prefix('/reports')->group(function(){
-
         Route::middleware(['auth:admin'])->group(function () {
             Route::get('/view','ReportView')->name('all-reports');
             Route::post('/search/by/date','ReportByDate')->name('search-by-date');
@@ -369,7 +369,6 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
 
 /* ===================================OPTION-du-SITE===================================== */
     Route::controller(SiteSettingController::class)->prefix('/brand')->group(function(){
-
         Route::middleware(['auth:admin'])->group(function () {
             Route::get('/site','SiteSetting')->name('site.setting');
             Route::post('/site/update','SiteSettingUpdate')->name('update.sitesetting');
@@ -380,13 +379,28 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
     });
 /* ===================================/OPTION-du-SITE===================================== */
 
-/* ========================================BRAND======================================= */
+/* ====================================RETURN-ORDER===================================== */
     Route::controller(ReturnController::class)->prefix('/return')->group(function(){
-
         Route::middleware(['auth:admin'])->group(function () {
             Route::get('/admin/request','ReturnRequest')->name('return.request');
             Route::get('/admin/return/approve/{order_id}','ReturnRequestApprove')->name('return.approve');
             Route::get('/admin/all/request','ReturnAllRequest')->name('all.request');
         }); 
     });
-/* ========================================/BRAND======================================= */
+/* ====================================/RETURN-ORDER===================================== */
+
+/* ====================================REVIEW===================================== */
+    Route::controller(ReviewController::class)->prefix('/review')->group(function(){
+        Route::middleware(['user'])->group(function () {
+            Route::post('/store','ReviewStore')->name('review.store');
+        });  
+        Route::middleware(['auth:admin'])->group(function () {
+            Route::get('/pending','PendingReview')->name('pending.review');
+            Route::get('/admin/approve/{id}','ReviewApprove')->name('review.approve');
+            Route::get('/publish','PublishReview')->name('publish.review');
+            Route::get('/delete/{id}','DeleteReview')->name('delete.review');   
+        });   
+    });
+/* ====================================/REVIEW===================================== */
+
+
