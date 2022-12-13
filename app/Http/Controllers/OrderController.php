@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Auth;
+use App\Models\Product;
+use DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
@@ -69,7 +71,16 @@ class OrderController extends Controller
         # get order
         $order = Order::findOrFail($id);
  
-        # update stauts
+		# update quantity whene product delivered
+		if($status == "delivered"){
+			$product = OrderItem::where('order_id',$id)->get();
+			foreach ($product as $item) {
+				Product::where('id',$item->product_id)
+						->update(['product_qty' => DB::raw('product_qty-'.$item->qty)]);
+			} 
+		}
+
+		# update status
         $order->update(["status" => $status]);
  
         # notification

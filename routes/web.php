@@ -403,4 +403,4 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
     });
 /* ====================================/REVIEW===================================== */
 
-
+Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
