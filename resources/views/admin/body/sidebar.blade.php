@@ -17,15 +17,34 @@
   </div>
   </div>
       
-  <ul class="sidebar-menu" data-widget="tree">  
+<ul class="sidebar-menu" data-widget="tree">  
   
     <li class="{{ ($route == 'admin_dashboard')? 'active' : '' }}">
       <a href="{{ route('admin_dashboard') }}">
         <i data-feather="pie-chart"></i>
         <span>Dashboard</span>
       </a>
-    </li>  
+    </li>
+
+    @php
+      $brand = (auth()->guard('admin')->user()->brand == 1);
+      $category = (auth()->guard('admin')->user()->category == 1);
+      $product = (auth()->guard('admin')->user()->product == 1);
+      $slider = (auth()->guard('admin')->user()->slider == 1);
+      $coupons = (auth()->guard('admin')->user()->coupons == 1);
+      $shipping = (auth()->guard('admin')->user()->shipping == 1);
+      //$blog = (auth()->guard('admin')->user()->blog == 1);
+      $setting = (auth()->guard('admin')->user()->setting == 1);
+      $returnorder = (auth()->guard('admin')->user()->returnorder == 1);
+      $review = (auth()->guard('admin')->user()->review == 1);
+      $orders = (auth()->guard('admin')->user()->orders == 1);
+      $stock = (auth()->guard('admin')->user()->stock == 1);
+      $reports = (auth()->guard('admin')->user()->reports == 1);
+      $alluser = (auth()->guard('admin')->user()->alluser == 1);
+      $adminuserrole = (auth()->guard('admin')->user()->adminuserrole == 1);
+    @endphp
   
+    @if($brand == true)
     <li class="treeview {{ ($prefix == '/brand')? 'active' : '' }}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -41,7 +60,10 @@
         </li>
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($category == true)
     <li class="treeview {{ ($prefix == '/categorie')? 'active' : '' }}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -63,7 +85,10 @@
         </li>
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($product == true)
     <li class="treeview {{ ($prefix == '/product')? 'active' : '' }}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -83,7 +108,10 @@
         
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($slider == true)
     <li class="treeview {{ ($prefix == '/slider')? 'active' : '' }}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -100,7 +128,10 @@
         
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($coupons == true)
     <li class="treeview {{ ($prefix == '/coupon')? 'active' : '' }}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -117,7 +148,10 @@
         
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($shipping == true)
     <li class="treeview {{ ($prefix == '/shipping')? 'active' : '' }}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -139,7 +173,10 @@
         </li>
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($orders == true)
     <li class="treeview {{ ($prefix == '/orders')? 'active' : '' }}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -179,24 +216,12 @@
         </li>
       </ul>
     </li>
+    @else
+    @endif
   
     <li class="header nav-small-cap">User Interface</li>
-    
-    <li class="treeview">
-      <a href="#">
-        <i data-feather="credit-card"></i>
-        <span>Cards</span>
-        <span class="pull-right-container">
-        <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="card_advanced.html"><i class="ti-more"></i>Advanced Cards</a></li>
-        <li><a href="card_basic.html"><i class="ti-more"></i>Basic Cards</a></li>
-        <li><a href="card_color.html"><i class="ti-more"></i>Cards Color</a></li>
-      </ul>
-    </li>
 
+    @if($reports == true)
     <li class="treeview {{ ($prefix == '/reports')? 'active' : '' }}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -212,7 +237,10 @@
         </li>
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($alluser == true)
     <li class="treeview {{ ($prefix == '/alluser')?'active':'' }}  ">
       <a href="#">
         <i data-feather="file"></i>
@@ -227,7 +255,10 @@
         </li>
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($setting == true)
     <li class="treeview {{ ($prefix == '/setting')?'active':'' }}  ">
       <a href="#">
         <i data-feather="file"></i>
@@ -245,7 +276,10 @@
         </li>
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($returnorder == true)
     <li class="treeview {{ ($prefix == '/return')?'active':'' }}  ">
       <a href="#">
         <i data-feather="file"></i>
@@ -263,7 +297,10 @@
         </li>
       </ul>
     </li>
+    @else
+    @endif
 
+    @if($review == true)
     <li class="treeview {{ ($prefix == '/review')?'active':'' }}  ">
       <a href="#">
         <i data-feather="file"></i>
@@ -281,8 +318,11 @@
           <a href="{{ route('publish.review') }}"><i class="ti-more"></i>Publish Review</a>
         </li>
       </ul>
-    </li> 
+    </li>
+    @else
+    @endif
 
+    @if($stock == true)
     <li class="treeview {{ ($prefix == '/stock')?'active':'' }}  ">
       <a href="#">
         <i data-feather="file"></i>
@@ -296,9 +336,29 @@
           <a href="{{ route('product.stock') }}"><i class="ti-more"></i>Product Stock</a>
         </li>
       </ul>
-    </li>    
+    </li>
+    @else
+    @endif
 
-  </ul>
+    @if($adminuserrole == true)
+    <li class="treeview {{ ($prefix == '/adminuserrole')?'active':'' }}  ">
+      <a href="#">
+        <i data-feather="file"></i>
+        <span>Admin User Role </span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-right pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+      <li class="{{ ($route == 'all.admin.user')? 'active':'' }}">
+        <a href="{{ route('all.admin.user') }}"><i class="ti-more"></i>All Admin User </a>
+      </li>
+      </ul>
+    </li>
+    @else
+    @endif
+
+</ul>
 
 </section>
 </aside>

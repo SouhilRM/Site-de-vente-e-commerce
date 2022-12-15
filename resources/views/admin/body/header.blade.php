@@ -92,7 +92,7 @@
 			</ul>
 		  </li>	
 		  @php
-			$admin = App\Models\Admin::findOrFail('1');
+			$admin = App\Models\Admin::findOrFail(Auth::id());
 		  @endphp
 	      <!-- User Account-->
           <li class="dropdown user user-menu">	

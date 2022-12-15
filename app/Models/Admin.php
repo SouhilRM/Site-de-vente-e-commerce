@@ -23,11 +23,31 @@ class Admin extends Authenticatable
      *
      * @var string[]
      */
+    /*
     protected $fillable = [
         'name',
         'email',
         'password',
+        'phone',
+        'brand',
+        'category',
+        'product',
+        'slider',
+        'coupons',
+        'shipping',
+        'setting',
+        'returnorder',
+        'review',
+        'orders',
+        'stock',
+        'reports',
+        'alluser',
+        'adminuserrole',
+        'type',
     ];
+    */
+    //tu mets ca c'est pareil
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.

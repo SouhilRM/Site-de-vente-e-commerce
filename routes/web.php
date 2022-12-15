@@ -26,6 +26,7 @@
     use App\Http\Controllers\SiteSettingController;
     use App\Http\Controllers\ReturnController;
     use App\Http\Controllers\ReviewController;
+    use App\Http\Controllers\AdminUserController;
 //end-controllers
 
 /* =======================================ADMIN======================================== */
@@ -101,7 +102,7 @@
 /* ========================================BRAND======================================= */
     Route::controller(BrandController::class)->prefix('/brand')->group(function(){
 
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:brand'])->group(function () {
             Route::get('/all','AllBrand')->name('all.brand');
             Route::post('/store','StoreBrand')->name('store.brand');
             Route::get('/edit/{id}','EditBrand')->name('edit.brand');
@@ -114,7 +115,7 @@
 /* =====================================CATEGORIE======================================= */
     Route::controller(CategorieController::class)->prefix('/categorie')->group(function(){
 
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:category'])->group(function () {
             Route::get('/all','AllCategorie')->name('all.categorie');
             Route::post('/store','StoreCategorie')->name('store.categorie');
             Route::get('/edit/{id}','EditCategorie')->name('edit.categorie');
@@ -126,7 +127,7 @@
 
 /* ===============================SUB-CATEGORIE================================= */
     Route::controller(SubCategorieController::class)->prefix('/categorie')->group(function(){
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:category'])->group(function () {
             Route::get('/sub/all','AllSubCategorie')->name('all.sub.categorie');
             Route::post('/sub/store','StoreSubCategorie')->name('store.sub.categorie');
             Route::get('/sub/edit/{id}','EditSubCategorie')->name('edit.sub.categorie');
@@ -138,7 +139,7 @@
 
 /* ===============================SUB-CATEGORIE================================= */
     Route::controller(SubSubCategorieController::class)->prefix('/categorie')->group(function(){
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:category'])->group(function () {
             Route::get('/sub/sub/all','AllSubSubCategorie')->name('all.sub.sub.categorie');
             Route::get('/subcategorie/ajax/{categorie_id}','GetSubCategory');
             Route::post('/sub/sub/store','StoreSubSubCategorie')->name('store.sub.sub.categorie');
@@ -151,8 +152,7 @@
 
 /* =======================================PRODUCT======================================= */
     Route::controller(ProductController::class)->prefix('/product')->group(function(){
-
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:product'])->group(function () {
             Route::get('/all','AllProduct')->name('all.product');
             Route::get('/add','AddProduct')->name('add.product');
             Route::get('/subcategorie/ajax/{categorie_id}','GetSubCategory');
@@ -172,7 +172,7 @@
 /* =====================================SLIDER======================================= */
     Route::controller(SliderController::class)->prefix('/slider')->group(function(){
 
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:slider'])->group(function () {
             Route::get('/all','AllSlider')->name('all.slider');
             Route::post('/store','StoreSlider')->name('store.slider');
             Route::get('/edit/{id}','EditSlider')->name('edit.slider');
@@ -237,7 +237,7 @@
 /* =====================================COUPON======================================= */
     Route::controller(CouponController::class)->prefix('/coupon')->group(function(){
 
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:coupons'])->group(function () {
             Route::get('/view','CouponView')->name('manage-coupon');
             Route::post('/store','CouponStore')->name('coupon.store');
             Route::get('/edit/{id}','CouponEdit')->name('coupon.edit');
@@ -249,7 +249,7 @@
 
 /* ==================================ShippingArea=================================== */
     Route::controller(ShippingAreaController::class)->prefix('/shipping')->group(function(){
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:shipping'])->group(function () {
             Route::get('/division/view','DivisionView')->name('manage-division');
             Route::post('/division/store','DivisionStore')->name('division.store');
             Route::get('/division/edit/{id}','DivisionEdit')->name('division.edit');
@@ -268,8 +268,7 @@
             Route::post('/state/update/{id}','StateUpdate')->name('state.update');
             Route::get('/state/delete/{id}','StateDelete')->name('state.delete');
             Route::get('/district/ajax/{division_id}','GetDistrict');
-
-            }); 
+        }); 
     });
 /* ==================================/ShippingArea=================================== */
 
@@ -328,7 +327,7 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
 /* =====================================ORDERS===================================== */
     Route::controller(OrderController::class)->prefix('/orders')->group(function(){
 
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:orders'])->group(function () {
             Route::get('/pending/orders','PendingOrders')->name('pending-orders');
             Route::get('/pending/orders/details/{order_id}','PendingOrdersDetails')->name('pending.order.details');
 
@@ -349,7 +348,7 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
 
 /* ========================================REPORT===================================== */
     Route::controller(ReportController::class)->prefix('/reports')->group(function(){
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:reports'])->group(function () {
             Route::get('/view','ReportView')->name('all-reports');
             Route::post('/search/by/date','ReportByDate')->name('search-by-date');
             Route::post('/search/by/month','ReportByMonth')->name('search-by-month');
@@ -361,15 +360,17 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
 /* ================================GESTION-USER-back===================================== */
     Route::controller(AdminProfileController::class)->prefix('/alluser')->group(function(){
 
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:alluser'])->group(function () {
             Route::get('/view','AllUsers')->name('all-users');
+            //modification
+            //suppression
         }); 
     });
 /* ===============================/GESTION-USER-back===================================== */
 
 /* ===================================OPTION-du-SITE===================================== */
     Route::controller(SiteSettingController::class)->prefix('/brand')->group(function(){
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:setting'])->group(function () {
             Route::get('/site','SiteSetting')->name('site.setting');
             Route::post('/site/update','SiteSettingUpdate')->name('update.sitesetting');
 
@@ -381,7 +382,7 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
 
 /* ====================================RETURN-ORDER===================================== */
     Route::controller(ReturnController::class)->prefix('/return')->group(function(){
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:returnorder'])->group(function () {
             Route::get('/admin/request','ReturnRequest')->name('return.request');
             Route::get('/admin/return/approve/{order_id}','ReturnRequestApprove')->name('return.approve');
             Route::get('/admin/all/request','ReturnAllRequest')->name('all.request');
@@ -394,7 +395,7 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
         Route::middleware(['user'])->group(function () {
             Route::post('/store','ReviewStore')->name('review.store');
         });  
-        Route::middleware(['auth:admin'])->group(function () {
+        Route::middleware(['auth:admin','privilege:review'])->group(function () {
             Route::get('/pending','PendingReview')->name('pending.review');
             Route::get('/admin/approve/{id}','ReviewApprove')->name('review.approve');
             Route::get('/publish','PublishReview')->name('publish.review');
@@ -403,4 +404,22 @@ Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.ord
     });
 /* ====================================/REVIEW===================================== */
 
-Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
+//STOCK-ROUTE
+Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock')->middleware(['auth:admin','privilege:stock']);
+
+/* ==================================Admin-User-Role=================================== */
+    Route::controller(AdminUserController::class)->prefix('/adminuserrole')->group(function(){
+        Route::middleware(['auth:admin','privilege:adminuserrole'])->group(function () {
+            Route::get('/all','AllAdminRole')->name('all.admin.user');
+            Route::get('/add','AddAdminRole')->name('add.admin');
+            Route::post('/store','StoreAdminRole')->name('admin.user.store');
+            Route::get('/edit/{id}','EditAdminRole')->name('edit.admin.user');
+            Route::post('/update','UpdateAdminRole')->name('admin.user.update');
+            Route::get('/delete/{id}','DeleteAdminRole')->name('delete.admin.user');
+        }); 
+    });
+    //error 403
+    Route::get('/access/error',function () {
+        return view('errors.403');
+    })->name('access.error');
+/* ==================================/Admin-User-Role=================================== */
