@@ -423,3 +423,12 @@ Route::get('/product', [ProductController::class, 'ProductStock'])->name('produc
         return view('errors.403');
     })->name('access.error');
 /* ==================================/Admin-User-Role=================================== */
+
+/* ==============================Order Traking Route=============================== */
+    Route::controller(AllUserController::class)->group(function(){
+        
+        Route::middleware(['user'])->group(function () {
+            Route::post('/order/tracking','OrderTraking')->name('order.tracking');   
+        });
+    });
+/* ==============================/Order Traking Route=============================== */
