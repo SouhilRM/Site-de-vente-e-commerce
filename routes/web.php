@@ -30,19 +30,11 @@
 //end-controllers
 
 /* =======================================ADMIN======================================== */
-    Route::middleware([
-        
-        'auth:sanctum,admin',
-        config('jetstream.auth_session'),
-        'verified'
+    //le dashboard
+    Route::get('/admin/dashboard', function () {
+        return view('admin.index');
+    })->name('admin_dashboard')->middleware('auth:admin');
 
-    ])->group(function () {
-
-        Route::get('/admin/dashboard', function () {
-            return view('admin.index');
-        })->name('admin_dashboard')->middleware('auth:admin');
-
-    });
     Route::controller(AdminController::class)->prefix('/admin')->group(function(){
 
         Route::middleware(['admin:admin'])->group(function(){
@@ -51,7 +43,6 @@
             
         });
 
-        /*Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'])->group(function(){*/
         Route::middleware(['auth:admin'])->group(function () {
             Route::get('/logout','destroy')->name('admin.logout')->middleware('auth:admin');
             Route::get('/profile','AdminProfile')->name('admin.profile')->middleware('auth:admin');
@@ -64,22 +55,6 @@
 /* ======================================/ADMIN======================================== */
 
 /* ========================================USER======================================== */
-    /*
-    Route::middleware([
-        
-        'auth:sanctum',
-        config('jetstream.auth_session'),
-        'verified'
-
-    ])->group(function () {
-
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
-
-    });
-    */
-
     //le dashboard qu'on a mis hors controller 
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -283,25 +258,18 @@
 
 /* ==================================Checkout================================= */
     Route::controller(CartController::class)->group(function(){
-
         Route::get('/checkout','CheckoutCreate')->name('checkout');
-        
     });
-
     Route::controller(CheckoutController::class)->group(function(){
-
         Route::get('/district-get/ajax/{division_id}','DistrictGetAjax');
         Route::get('/state-get/ajax/{district_id}','StateGetAjax');
         Route::post('/checkout/store','CheckoutStore')->name('checkout.store');
-
-
     });
 /* ==================================/Checkout================================= */
 
 /* ==================================STRIPE-PAYMENT=============================== */
     Route::controller(StripeController::class)->group(function(){
-
-        Route::middleware(['auth'])->group(function () {
+        Route::middleware(['user'])->group(function () {
             Route::post('/stripe/order','StripeOrder')->name('stripe.order');
         });
     });
@@ -310,7 +278,7 @@
 /* ========================================ALLUsers==================================== */
     Route::controller(AllUserController::class)->prefix('/user')->group(function(){
 
-        Route::middleware(['auth'])->group(function () {
+        Route::middleware(['user'])->group(function () {
             Route::get('/my/orders','MyOrders')->name('my.orders');
             Route::get('/order_details/{order_id}','OrderDetails');
             Route::get('/invoice_download/{order_id}','InvoiceDownload');
@@ -426,7 +394,6 @@ Route::get('/product', [ProductController::class, 'ProductStock'])->name('produc
 
 /* ==============================Order Traking Route=============================== */
     Route::controller(AllUserController::class)->group(function(){
-        
         Route::middleware(['user'])->group(function () {
             Route::post('/order/tracking','OrderTraking')->name('order.tracking');   
         });
