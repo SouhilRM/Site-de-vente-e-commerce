@@ -399,3 +399,9 @@ Route::get('/product', [ProductController::class, 'ProductStock'])->name('produc
         });
     });
 /* ==============================/Order Traking Route=============================== */
+
+/// Product Search Route 
+Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search');
+
+
+

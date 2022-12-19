@@ -189,4 +189,12 @@ class IndexController extends Controller
 		));
 
 	} // end method 
+
+    public function ProductSearch(Request $request){
+		$item = $request->search;
+		// echo "$item";
+        $categories = Categorie::orderBy('categorie_name_en','ASC')->get();
+		$products = Product::where('product_name_en','LIKE',"%$item%")->where('status',1)->get();
+		return view('frontend.product.search',compact('products','categories'));
+	}// end method 
 }
