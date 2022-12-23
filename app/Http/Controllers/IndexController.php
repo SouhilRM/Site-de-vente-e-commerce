@@ -160,15 +160,17 @@ class IndexController extends Controller
         $subcategory = SubCategorie::findOrFail($id);
         $categories = Categorie::orderBy('categorie_name_en','ASC')->get();
         $products = Product::where('status',1)->where('sub_categorie_id',$id)->orderBy('id','DESC')->paginate(12);
-        return view('frontend.product.product_subcat',compact('products','categories','subcategory'));
+        $breadsubcat = SubCategorie::with(['categorie'])->where('id',$id)->get();
+        return view('frontend.product.product_subcat',compact('products','categories','subcategory','breadsubcat'));
     }//end methode
 
     public function ProductSubSubcat($id,$slug_en){
         $subcategory = SubSubCategorie::findOrFail($id);
         $categories = Categorie::orderBy('categorie_name_en','ASC')->get();
         $products = Product::where('status',1)->where('sub_sub_categorie_id',$id)->orderBy('id','DESC')->paginate(12);
+        $breadsubsubcat = SubSubCategorie::with(['categorie','sub_categorie'])->where('id',$id)->get();
         if($products)
-            return view('frontend.product.product_subsubcat',compact('products','categories','subcategory'));
+            return view('frontend.product.product_subsubcat',compact('products','categories','subcategory','breadsubsubcat'));
         else
             return view('frontend.index');
     }//end methode

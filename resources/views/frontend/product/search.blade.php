@@ -5,20 +5,6 @@
 Product Search Page 
 @endsection
 
-
-<div class="breadcrumb">
-<div class="container">
-<div class="breadcrumb-inner">
-    <ul class="list-inline list-unstyled">
-        <li><a href="#">Home</a></li>
-        <li class='active'>Handbags</li>
-    </ul>
-</div>
-</div>
-</div>
-
-
-
 <div class="body-content outer-top-xs">
 <div class='container'>
 <div class='row'>
@@ -95,7 +81,7 @@ Product Search Page
             <!-- /.container-fluid --> 
         </div>
         </div>
-        
+        <h4><b>Total Search </b><span class="badge badge-danger" style="background: #FF0000;"> {{ count($products) }} </span> Items  </h4>
     
         <div class="clearfix filters-container m-t-10">
         <div class="row">
@@ -169,7 +155,7 @@ Product Search Page
                     <div class="products">
                     <div class="product">
                         <div class="product-image">
-                        <div class="image"> <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                        <div class="image"> <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                             <img  src="{{ asset($product->product_thambnail) }}" alt=""></a> 
                         </div>
                         <!-- /.image -->
@@ -189,7 +175,7 @@ Product Search Page
                         
                         <div class="product-info text-left">
                         <h3 class="name">
-                            <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                            <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                                 @if(session('language') == 'english'){{$product->product_name_en}}
                                 @else {{$product->product_name_fr}} 
                                 @endif
@@ -261,7 +247,7 @@ Product Search Page
                         <div class="col col-sm-8 col-lg-8">
                         <div class="product-info">
                             <h3 class="name">
-                                <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                                <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                                     @if(session('language') == 'english'){{$product->product_name_en}}
                                     @else {{$product->product_name_fr}} 
                                     @endif

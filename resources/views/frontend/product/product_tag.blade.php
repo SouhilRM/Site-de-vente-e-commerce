@@ -10,8 +10,8 @@
 <div class="container">
 <div class="breadcrumb-inner">
     <ul class="list-inline list-unstyled">
-        <li><a href="#">Home</a></li>
-        <li class='active'>Handbags</li>
+        <li><a href="{{ route('home') }}">Home</a></li>
+        <li class='active'>{{ $tag }}</li>
     </ul>
 </div>
 </div>
@@ -169,7 +169,7 @@
                     <div class="products">
                     <div class="product">
                         <div class="product-image">
-                        <div class="image"> <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                        <div class="image"> <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                             <img  src="{{ asset($product->product_thambnail) }}" alt=""></a> 
                         </div>
                         <!-- /.image -->
@@ -189,7 +189,7 @@
                         
                         <div class="product-info text-left">
                         <h3 class="name">
-                            <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                            <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                                 @if(session('language') == 'english'){{$product->product_name_en}}
                                 @else {{$product->product_name_fr}} 
                                 @endif
@@ -261,7 +261,7 @@
                         <div class="col col-sm-8 col-lg-8">
                         <div class="product-info">
                             <h3 class="name">
-                                <a href="{{ route('product.details',[$product->product_slug_en,$product->id]) }}">
+                                <a href="{{ route('product.details',[$product->id,$product->product_slug_en]) }}">
                                     @if(session('language') == 'english'){{$product->product_name_en}}
                                     @else {{$product->product_name_fr}} 
                                     @endif

@@ -12,8 +12,14 @@
 <div class="container">
 <div class="breadcrumb-inner">
     <ul class="list-inline list-unstyled">
-        <li><a href="#">Home</a></li>
-        <li class='active'>Handbags</li>
+        <li><a href="{{ route('home') }}">Home</a></li>
+        @foreach($breadsubcat as $item)
+        <li>{{ $item->categorie->categorie_name_en }}</li>
+        @endforeach
+
+        @foreach($breadsubcat as $item)
+        <li class='active'>{{ $item->categorie_name_en }}</li>
+        @endforeach
     </ul>
 </div>
 </div>
@@ -98,6 +104,13 @@
         </div>
         </div>
         
+        @foreach($breadsubcat as $item)
+            <span class="badge badge-danger" style="background: #808080">{{ $item->categorie->categorie_name_en }} </span>
+        @endforeach
+       /
+        @foreach($breadsubcat as $item)
+            <span class="badge badge-danger" style="background: #FF0000">{{ $item->categorie_name_en }} </span>
+        @endforeach  
     
         <div class="clearfix filters-container m-t-10">
         <div class="row">
