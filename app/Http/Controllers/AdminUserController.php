@@ -62,44 +62,44 @@ class AdminUserController extends Controller
     public function UpdateAdminRole(Request $request){
     	$admin_id = $request->id;
     	Admin::findOrFail($admin_id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
+        'name' => $request->name,
+        'email' => $request->email,
 
-            'phone' => $request->phone,
-            'brand' => $request->brand,
-            'category' => $request->category,
-            'product' => $request->product,
-            'slider' => $request->slider,
-            'coupons' => $request->coupons,
+        'phone' => $request->phone,
+        'brand' => $request->brand,
+        'category' => $request->category,
+        'product' => $request->product,
+        'slider' => $request->slider,
+        'coupons' => $request->coupons,
 
-            'shipping' => $request->shipping,
-            //'blog' => $request->blog,
-            'setting' => $request->setting,
-            'returnorder' => $request->returnorder,
-            'review' => $request->review,
+        'shipping' => $request->shipping,
+        //'blog' => $request->blog,
+        'setting' => $request->setting,
+        'returnorder' => $request->returnorder,
+        'review' => $request->review,
 
-            'orders' => $request->orders,
-            'stock' => $request->stock,
-            'reports' => $request->reports,
-            'alluser' => $request->alluser,
-            'adminuserrole' => $request->adminuserrole,
-            'type' => 2,
+        'orders' => $request->orders,
+        'stock' => $request->stock,
+        'reports' => $request->reports,
+        'alluser' => $request->alluser,
+        'adminuserrole' => $request->adminuserrole,
+        'type' => 2,
 
-            'created_at' => Carbon::now(),
+        'created_at' => Carbon::now(),
     	]);
 	    $notification = array(
-			'message' => 'Admin User Updated Successfully',
-			'alert-type' => 'info'
-		);
-		return redirect()->route('all.admin.user')->with($notification);
+        'message' => 'Admin User Updated Successfully',
+        'alert-type' => 'info'
+		  );
+		  return redirect()->route('all.admin.user')->with($notification);
     } // end method 
 
     public function DeleteAdminRole($id){
-        Admin::findOrFail($id)->delete();
-        $notification = array(
-           'message' => 'Admin User Deleted Successfully',
-           'alert-type' => 'info'
-        );
-       return redirect()->back()->with($notification);
+      Admin::findOrFail($id)->delete();
+      $notification = array(
+        'message' => 'Admin User Deleted Successfully',
+        'alert-type' => 'info'
+      );
+      return redirect()->back()->with($notification);
     } // end method 
 }
