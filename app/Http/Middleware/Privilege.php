@@ -20,6 +20,7 @@ class Privilege
             return $next($request);
         }
         else{
+            //abort(code:403);
             return redirect()->route('access.error');
         }
     }
