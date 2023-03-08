@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" defer>
     $.ajaxSetup({
         headers:{
             'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
@@ -12,60 +12,65 @@
             url: '/product/view/modal/'+id,
             dataType:'json',
             success:function(data){
-            // console.log(data)
-            $('#pname').text(data.product.product_name_en);
-            //$('#price').text(data.product.selling_price);
-            $('#pcode').text(data.product.product_code);
-            $('#pcategory').text(data.product.category.categorie_name_en);
-            $('#pbrand').text(data.product.brand.brand_name_en);
-            $('#pimage').attr('src','/'+data.product.product_thambnail);
+                // console.log(data)
+                $('#pname').text(data.product.product_name_en);
+                //$('#price').text(data.product.selling_price);
+                $('#pcode').text(data.product.product_code);
+                $('#pcategory').text(data.product.category.categorie_name_en);
+                $('#pbrand').text(data.product.brand.brand_name_en);
+                $('#pimage').attr('src','/'+data.product.product_thambnail);
 
-            $('#product_id').val(id);
-            $('#qty').val(1);
-                
-            // Product Price 
-            if (data.product.discount_price == null) {
-                $('#pprice').text('');
-                $('#oldprice').text('');
-                $('#pprice').text('$'+data.product.selling_price);
-            }else{
-                $('#pprice').text('$'+data.product.discount_price);
-                $('#oldprice').text('$'+data.product.selling_price);
-            } // end prodcut price 
+                $('#product_id').val(id);
+                $('#qty').val(1);
+                    
+                // Product Price 
+                if (data.product.discount_price == null) {
+                    $('#pprice').text('');
+                    $('#oldprice').text('');
 
-            // Start Stock opiton
-            if (data.product.product_qty > 0) {
-                $('#aviable').text('');
-                $('#stockout').text('');
-                $('#aviable').text('aviable');
-            }else{
-                $('#aviable').text('');
-                $('#stockout').text('');
-                $('#stockout').text('stockout');
-            } // end Stock Option 
-
-            //color
-            $('select[name="color"]').empty();
-            $.each(data.color,function(key,value){
-                if (data.color != "") {
-                    $('#colorArea').show();
+                    $('#pprice').text('$'+data.product.selling_price);
                 }else{
-                    $('#colorArea').hide();
-                }
-                $('select[name="color"]').append('<option value=" '+value+' ">'+value+' </option>')
-            })//end color
+                    $('#pprice').text('');
+                    $('#oldprice').text('');
 
-            //size
-            $('select[name="size"]').empty();
-            $.each(data.size,function(key,value){
-                if (data.size != "") {
-                    $('#sizeArea').show();
+                    $('#pprice').text('$'+data.product.discount_price);
+                    $('#oldprice').text('$'+data.product.selling_price);
+                } // end prodcut price 
+
+                // Start Stock opiton
+                if (data.product.product_qty > 0) {
+                    $('#aviable').text('');
+                    $('#stockout').text('');
+
+                    $('#aviable').text('aviable');
                 }else{
-                    $('#sizeArea').hide();
-                }
-                $('select[name="size"]').append('<option value=" '+value+' ">'+value+' </option>')
-            })//end size
+                    $('#aviable').text('');
+                    $('#stockout').text('');
+                    
+                    $('#stockout').text('stockout');
+                } // end Stock Option 
 
+                //color
+                $('select[name="color"]').empty();
+                $.each(data.color,function(key,value){
+                    if (data.color != "") {
+                        $('#colorArea').show();
+                    }else{
+                        $('#colorArea').hide();
+                    }
+                    $('select[name="color"]').append('<option value=" '+value+' ">'+value+' </option>')
+                })//end color
+
+                //size
+                $('select[name="size"]').empty();
+                $.each(data.size,function(key,value){
+                    if (data.size != "") {
+                        $('#sizeArea').show();
+                    }else{
+                        $('#sizeArea').hide();
+                    }
+                    $('select[name="size"]').append('<option value=" '+value+' ">'+value+' </option>')
+                })//end size
             }
         })
     }
@@ -118,7 +123,7 @@
 
 </script>
 
-<script type="text/javascript">
+<script type="text/javascript" defer>
     function miniCart(){
        $.ajax({
            type: 'GET',
@@ -197,7 +202,7 @@
 </script>
 
 <!--  /// Start Add Wishlist Page  //// -->
-<script type="text/javascript">
+<script type="text/javascript" defer>
     function addToWishList(product_id){
         $.ajax({
             type: "POST",
@@ -233,7 +238,7 @@
 <!--  /// End Add Wishlist Page  ////   -->
 
 <!-- /// Load Wishlist Data  -->
-<script type="text/javascript">
+<script type="text/javascript" defer>
     function wishlist(){
        $.ajax({
            type: 'GET',
@@ -317,7 +322,7 @@
 <!-- /// End Load Wisch list Data  -->
 
 <!-- /// Load My Cart /// -->
-<script type="text/javascript">
+<script type="text/javascript" defer>
     function cart(){
        $.ajax({
            type: 'GET',
@@ -464,7 +469,7 @@
 <!-- //End Load My cart / -->
 
 <!--  //////////////// =========== Coupon Apply Start ================= ////  -->
-<script type="text/javascript">
+<script type="text/javascript" defer>
     function applyCoupon(){
         // coupon_name c'est la variale qui est dans l'input du coupon dans la vue view_mycart t'ajoute juste juste un # pour la recuperer
         var coupon_name = $('#coupon_name').val();
@@ -556,7 +561,7 @@
 
 <!--  //////////////// =========== Start Coupon Remove================= ////  -->
 
-<script type="text/javascript">
+<script type="text/javascript" defer>
      
     function couponRemove(){
        $.ajax({

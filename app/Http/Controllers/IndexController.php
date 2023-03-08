@@ -176,6 +176,7 @@ class IndexController extends Controller
     }//end methode
 
     public function ProductViewAjax($id){
+        //le ::with('category','brand') qu'on a rajouté c'est parcequ'on aura besoin d'afficher la categorie et le brand dans notre model donc on a juste fais un petit belogTo si tu vas check le model produit et puis basta
 		$product = Product::with('category','brand')->findOrFail($id);
 
 		$color = $product->product_color_en;
@@ -193,10 +194,25 @@ class IndexController extends Controller
 	} // end method 
 
     public function ProductSearch(Request $request){
-		$item = $request->search;
+        //petite validation pour ne pas afficher tous les produits quand le user ne tape rien tu le renvoie vers la page d'acueil
+        //dump($request->search);
+		if(!$item = $request->search) {
+            return redirect()->route('home');
+        }
 		// echo "$item";
         $categories = Categorie::orderBy('categorie_name_en','ASC')->get();
 		$products = Product::where('product_name_en','LIKE',"%$item%")->where('status',1)->get();
 		return view('frontend.product.search',compact('products','categories'));
-	}// end method 
+	}// end method
+
+    public function SearchProduct(Request $request){
+		if(!$item = $request->search) {
+            return ;
+        }
+		$item = $request->search;		 
+
+		$products = Product::where('product_name_en','LIKE',"%$item%")->select('product_name_en','product_thambnail','selling_price','id','product_slug_en')->limit(5)->get();
+
+		return view('frontend.product.search_product',compact('products'));
+	}// end method
 }

@@ -173,6 +173,8 @@
         Route::get('/product/tag/{tag}','ProductTag')->name('product.tag');
         Route::get('/product/subcat/{id}/{slug_en}','ProductSubcat')->name('product.subcat');
         Route::get('/product/subsubcat/{id}/{slug_en}','ProductSubSubcat')->name('product.subsubcat');
+
+        //route qui envoie la data à notre model pour afficher les infos
         Route::get('/product/view/modal/{id}','ProductViewAjax'); ////url:"{{ route('product.view.modal') }}" + '/' + id,   marche aussi !!
     });
 /* =======================================/TAG======================================= */
@@ -402,6 +404,7 @@ Route::get('/product', [ProductController::class, 'ProductStock'])->name('produc
 
 /// Product Search Route 
 Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search');
-
+//recherche dinamyque avec ajax
+Route::post('search-product', [IndexController::class, 'SearchProduct']);
 
 
