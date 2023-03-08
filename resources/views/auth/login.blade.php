@@ -63,9 +63,9 @@
         <form method="POST" action="{{ route('register') }}" class="register-form outer-top-xs" role="form">@csrf
 
             <div class="form-group">
-                <label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
-                <input type="text" name="name" class="form-control unicase-form-control text-input" id="name" >
-                @error('name')
+                <label class="info-title" for="exampleInputEmail1">User Email <span>*</span></label>
+                <input type="text" id="email" name="email" class="form-control unicase-form-control text-input">
+                @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -104,8 +104,8 @@
 
             <div class="form-group">
                 <label class="info-title" for="exampleInputEmail1">Confirm Password <span>*</span></label>
-                <input type="password" name="password_confirmation" class="form-control unicase-form-control text-input" id="password_confirmation" >
-                @error('password_confirmation')
+                <input type="text" id="name" name="name" class="form-control unicase-form-control text-input">
+                @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
