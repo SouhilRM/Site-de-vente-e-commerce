@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->text('comment');
             $table->string('summary');
+            $table->integer('rating')->default(0);
 
             //relation OneToMany meme principe que les commentaires
             $table->unSignedBigInteger('product_id')->unsigned();

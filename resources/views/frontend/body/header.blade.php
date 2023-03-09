@@ -33,14 +33,7 @@
           <div class="cnt-block">
             <ul class="list-unstyled list-inline">
               @auth
-              <li class="dropdown dropdown-small"> 
-                <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">USD</a></li>
-                  <li><a href="#">INR</a></li>
-                  <li><a href="#">GBP</a></li>
-                </ul>
-              </li>
+              
               @else
               @endauth
               <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Language </span><b class="caret"></b></a>
