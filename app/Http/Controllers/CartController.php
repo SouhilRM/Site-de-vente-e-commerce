@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Product;
-use Gloudemans\Shoppingcart\Facades\Cart;
-use App\Models\Coupon;
 use Carbon\Carbon;
+use App\Models\Coupon;
+use App\Models\Product;
 use App\Models\ShipDivision;
-use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Session;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {

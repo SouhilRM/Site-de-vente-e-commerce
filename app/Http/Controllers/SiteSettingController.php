@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SiteSetting;
-use Image;
+use Intervention\Image\Facades\Image;
 use App\Models\Seo;
 
 class SiteSettingController extends Controller

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\Categorie;
-use App\Models\SubCategorie;
-use App\Models\SubSubCategorie;
+
 use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Product;
+use App\Models\Categorie;
+use App\Models\SubCategorie;
+use Illuminate\Http\Request;
+use App\Models\SubSubCategorie;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {

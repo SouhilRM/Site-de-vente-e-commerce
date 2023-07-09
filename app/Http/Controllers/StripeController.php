@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Gloudemans\Shoppingcart\Facades\Cart;
-use App\Models\Order;
-use App\Models\OrderItem;
-use Illuminate\Support\Facades\Session;
-use Auth;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Order;
 use App\Mail\OrderMail;
+use App\Models\OrderItem;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class StripeController extends Controller
 {

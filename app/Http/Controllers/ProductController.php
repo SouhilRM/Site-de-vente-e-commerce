@@ -8,7 +8,7 @@ use App\Models\Categorie;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Multi_image;
-use Image;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Carbon;
 use App\Models\SubSubCategorie;
 

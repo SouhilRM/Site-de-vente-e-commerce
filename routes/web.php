@@ -38,7 +38,7 @@
     Route::controller(AdminController::class)->prefix('/admin')->group(function(){
 
         Route::middleware(['admin:admin'])->group(function(){
-            Route::get('/login','LoginForm');
+            Route::get('/login','LoginForm')->name('admin');
             Route::post('/login','store')->name('admin.login');
             
         });

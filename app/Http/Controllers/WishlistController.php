@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
-use App\Models\Wishlist;
+
 use Carbon\Carbon;
+use App\Models\Wishlist;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {

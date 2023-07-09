@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Brand;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class BrandController extends Controller
 {

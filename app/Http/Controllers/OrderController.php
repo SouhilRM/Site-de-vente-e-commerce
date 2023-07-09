@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Order;
-use App\Models\OrderItem;
-use Auth;
 use App\Models\Product;
-use DB;
+use App\Models\OrderItem;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
+
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {

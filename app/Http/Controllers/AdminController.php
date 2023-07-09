@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers; //modiff
 
-use Illuminate\Contracts\Auth\StatefulGuard;
+use App\Models\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Features;
 use Illuminate\Routing\Pipeline;
-use App\Actions\Fortify\AttemptToAuthenticate;  //modiff
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Laravel\Fortify\Contracts\LogoutResponse;
+use Laravel\Fortify\Http\Requests\LoginRequest;
+use Laravel\Fortify\Contracts\LoginViewResponse;
+use App\Http\Responses\LoginResponse;    //modiff
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
+use App\Actions\Fortify\AttemptToAuthenticate;  //modiff
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable; //modiff
-use App\Http\Responses\LoginResponse;    //modiff
-use Laravel\Fortify\Contracts\LoginViewResponse;
-use Laravel\Fortify\Contracts\LogoutResponse;
-use Laravel\Fortify\Features;
-use Laravel\Fortify\Fortify;
-use Laravel\Fortify\Http\Requests\LoginRequest;
-
-use App\Models\Admin;
-use Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller //modiff
 {
